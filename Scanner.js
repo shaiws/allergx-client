@@ -20,7 +20,7 @@ function Scanner({ route, navigation }) {
                 let allergens = await response.text()
                 if (allergens != "Not Available")
                     allergens = JSON.parse(allergens)
-                navigation.navigate("Product", { prodName: item.name, prodCode: item.id, prodAllergens: allergens })
+                navigation.navigate("Product", { prodName: prodName.name, prodCode: e.data, prodAllergens: allergens })
                 // alert(`שם המוצר: ${prodName.name}\nברקוד: ${e.data}.\nאלרגנים: ${allergens}`);
             }
             catch (error) {

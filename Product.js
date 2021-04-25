@@ -8,7 +8,7 @@ function Product({ route, navigation }) {
         <View style={{ alignItems: "flex-end", flex: 1 }}>
             <Text>{prodName}</Text>
             <Text>{prodCode}</Text>
-            <Text>{prodAllergens}</Text>
+            <Text>{prodAllergens.toString()}</Text>
             <Image
                 style={{ width: 40, height: 40 }}
                 source={{
