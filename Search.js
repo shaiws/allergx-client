@@ -6,7 +6,9 @@ import React, { useState } from 'react';
 
 // import all the components we are going to use
 import { SafeAreaView, Text, Image, StyleSheet, View, FlatList } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+// import { SearchBar } from 'react-native-elements';
+import { Searchbar } from 'react-native-paper';
+
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -96,7 +98,7 @@ const Search = ({ navigation }) => {
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
         />
-        <SearchBar
+        <Searchbar
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
