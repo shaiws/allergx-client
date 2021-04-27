@@ -1,36 +1,42 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { ProgressBar, Colors } from 'react-native-paper';
 
 
 
 function Scanner({ route, navigation }) {
     const [isBarcodeRead, setBarcodeRead] = useState(false);
+    const [percentages, setPercentages] = useState(0)
 
     async function onBarCodeRead(e) {
         if (!isBarcodeRead) {
+            setPercentages(0)
             setBarcodeRead(true);
-            console.log("Scanner");
             try {
-                console.log(`http://api.imri.ga/items/${e.data}`);
                 const product = await fetch(`http://api.imri.ga/items/${e.data}`);
+                setPercentages(percentages + 0.25)
                 const prodName = await product.json();
-                console.log(prodName.name);
+                setPercentages(percentages + 0.25)
                 const response = await fetch(`http://192.168.1.230:5000/barcode?code=${e.data}`);
+                setPercentages(percentages + 0.25)
                 let allergens = await response.text()
-                if (allergens != "Not Available")
+                if (allergens != "Not Available") {
                     allergens = JSON.parse(allergens)
+                    setPercentages(percentages + 0.25)
+                }
                 navigation.navigate("Product", { prodName: prodName.name, prodCode: e.data, prodAllergens: allergens })
-                // alert(`שם המוצר: ${prodName.name}\nברקוד: ${e.data}.\nאלרגנים: ${allergens}`);
             }
             catch (error) {
                 console.log(error);
+                setPercentages(0)
                 alert("Check your internet connection");
             }
         }
     }
     return (
         <View style={styles.container}>
+            <ProgressBar progress={percentages} color={Colors.green} />
             <RNCamera
                 style={styles.preview}
                 onBarCodeRead={onBarCodeRead}

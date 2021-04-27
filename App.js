@@ -1,18 +1,19 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {TouchableOpacity, View, StyleSheet, Text} from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 import Search from './Search';
 import Scanner from './Scanner';
 import Product from './Product';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Colors } from 'react-native-paper';
 
 const Stack = createStackNavigator();
-function Home({navigation}) {
+function Home({ navigation }) {
   return (
-    <View style={{padding: 10, flex: 1}}>
+    <View style={{ padding: 10, flex: 1 }}>
       <View style={styles.container}>
- 
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Search')}>
@@ -35,8 +36,9 @@ function App() {
         <Stack.Screen
           name="Home"
           options={{
-            title: 'Creative name',
+            title: 'ראשי',
             headerStyle: {
+              textColor: Colors.black,
               backgroundColor: '#f4511e',
             },
           }}
@@ -45,7 +47,7 @@ function App() {
         <Stack.Screen
           name="Search"
           options={{
-            title: 'Creative name',
+            title: 'חיפוש',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -55,7 +57,7 @@ function App() {
         <Stack.Screen
           name="Scanner"
           options={{
-            title: 'Creative name',
+            title: 'סורק',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -65,7 +67,7 @@ function App() {
         <Stack.Screen
           name="Product"
           options={{
-            title: 'Creative name',
+            title: 'מוצר',
             headerStyle: {
               backgroundColor: '#f4511e',
             },

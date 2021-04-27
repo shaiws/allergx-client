@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, Text, Image, StyleSheet, View, FlatList } from 'react-native';
 // import { SearchBar } from 'react-native-elements';
 import { Searchbar } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 
 
 const Search = ({ navigation }) => {
@@ -61,28 +62,19 @@ const Search = ({ navigation }) => {
   const ItemSeparatorView = () => {
     return (
       // Flat List Item Separator
-      <View
-        style={{
-          height: 0.5,
-          width: '100%',
-          backgroundColor: '#C8C8C8',
-        }}
-      />
+      <Divider />
     );
   };
 
 
   const getItem = async (item) => {
-    console.log("Search");
     // Function for click on an item
     try {
       const response = await fetch(`http://192.168.1.230:5000/barcode?code=${item.id}`);
-      console.log(response);
       let allergens = await response.text()
       if (allergens != "Not Available")
         allergens = JSON.parse(allergens)
       navigation.navigate("Product", { prodName: item.name, prodCode: item.id, prodAllergens: allergens })
-      // alert(`שם המוצר: ${item.name}\nברקוד: ${item.id}.\nאלרגנים: ${allergens}`);
     }
     catch (error) {
       alert("Check your internet connection");
@@ -100,7 +92,6 @@ const Search = ({ navigation }) => {
         />
         <Searchbar
           round
-          searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
           placeholder="Type Here..."

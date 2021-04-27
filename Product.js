@@ -3,7 +3,6 @@ import { Text, View, Image } from 'react-native';
 
 function Product({ route, navigation }) {
     const { prodName, prodCode, prodAllergens } = route.params;
-    console.log(prodAllergens);
     return (
         <View style={{ alignItems: "flex-end", flex: 1 }}>
             <Text>{prodName}</Text>
