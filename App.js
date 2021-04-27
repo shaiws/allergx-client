@@ -4,9 +4,10 @@ import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 import Search from './Search';
 import Scanner from './Scanner';
 import Product from './Product';
+import Favorites from './Favorites';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Colors } from 'react-native-paper';
+import { IconButton, Colors } from 'react-native-paper';
 
 const Stack = createStackNavigator();
 function Home({ navigation }) {
@@ -24,6 +25,29 @@ function Home({ navigation }) {
           onPress={() => navigation.navigate('Scanner')}>
           <Text style={styles.buttonLabel}>{'סריקת ברקוד'}</Text>
         </TouchableOpacity>
+        <IconButton
+          icon="star"
+          color={Colors.red500}
+          size={20}
+          onPress={() => console.log('Pressed')}
+        />
+        <IconButton
+          icon="database-search"
+          color={Colors.red500}
+          size={20}
+          onPress={() => console.log('Pressed')}
+        />
+        <IconButton
+          icon="camera"
+          color={Colors.red500}
+          size={20}
+          onPress={() => console.log('Pressed')}
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Favorites')}>
+          <Text style={styles.buttonLabel}>{'מועדפים'}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -36,7 +60,7 @@ function App() {
         <Stack.Screen
           name="Home"
           options={{
-            title: 'ראשי',
+            title: 'Home',
             headerStyle: {
               textColor: Colors.black,
               backgroundColor: '#f4511e',
@@ -47,7 +71,7 @@ function App() {
         <Stack.Screen
           name="Search"
           options={{
-            title: 'חיפוש',
+            title: 'Search',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -57,7 +81,7 @@ function App() {
         <Stack.Screen
           name="Scanner"
           options={{
-            title: 'סורק',
+            title: 'Scanner',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -67,12 +91,22 @@ function App() {
         <Stack.Screen
           name="Product"
           options={{
-            title: 'מוצר',
+            title: 'Product',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
           }}
           component={Product}
+        />
+        <Stack.Screen
+          name="Favorites"
+          options={{
+            title: 'Favorites',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+          }}
+          component={Favorites}
         />
       </Stack.Navigator>
     </NavigationContainer>
