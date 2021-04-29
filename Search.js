@@ -1,21 +1,12 @@
-// Searching using Search Bar Filter in React Native List View
-// https://aboutreact.com/react-native-search-bar-filter-on-listview/
-
-// import React in our code
 import React, { useState } from 'react';
-
-// import all the components we are going to use
 import { SafeAreaView, Text, Image, StyleSheet, View, FlatList } from 'react-native';
-// import { SearchBar } from 'react-native-elements';
-import { Searchbar } from 'react-native-paper';
-import { Divider } from 'react-native-paper';
+import { IconButton, Colors, Divider, Searchbar } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
-
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
@@ -70,7 +61,7 @@ const Search = ({ navigation }) => {
   const getItem = async (item) => {
     // Function for click on an item
     try {
-      const response = await fetch(`http://192.168.1.230:5000/barcode?code=${item.id}`);
+      const response = await fetch(`http://296503a35747.ngrok.io/barcode?code=${item.id}`);
       let allergens = await response.text()
       if (allergens != "Not Available")
         allergens = JSON.parse(allergens)
@@ -108,6 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   itemStyle: {
+    flex: 1,
     padding: 10,
   },
 });

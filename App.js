@@ -1,13 +1,14 @@
-import 'react-native-gesture-handler';
+//import 'react-native-gesture-handler';
 import * as React from 'react';
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 import Search from './Search';
 import Scanner from './Scanner';
 import Product from './Product';
 import Favorites from './Favorites';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { IconButton, Colors } from 'react-native-paper';
+
 
 const Stack = createStackNavigator();
 function Home({ navigation }) {
@@ -20,34 +21,33 @@ function Home({ navigation }) {
           onPress={() => navigation.navigate('Search')}>
           <Text style={styles.buttonLabel}>{'חיפוש מרשימה'}</Text>
         </TouchableOpacity>
+        <IconButton
+          icon="database-search"
+          color={Colors.red500}
+
+          onPress={() => navigation.navigate('Search')}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Scanner')}>
           <Text style={styles.buttonLabel}>{'סריקת ברקוד'}</Text>
         </TouchableOpacity>
         <IconButton
-          icon="star"
+          icon="barcode"
           color={Colors.red500}
-          size={20}
-          onPress={() => console.log('Pressed')}
-        />
-        <IconButton
-          icon="database-search"
-          color={Colors.red500}
-          size={20}
-          onPress={() => console.log('Pressed')}
-        />
-        <IconButton
-          icon="camera"
-          color={Colors.red500}
-          size={20}
-          onPress={() => console.log('Pressed')}
+
+          onPress={() => navigation.navigate('Scanner')}
         />
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Favorites')}>
           <Text style={styles.buttonLabel}>{'מועדפים'}</Text>
         </TouchableOpacity>
+        <IconButton
+          icon="star"
+          color={Colors.red500}
+          onPress={() => navigation.navigate('Favorites')}
+        />
       </View>
     </View>
   );
@@ -62,7 +62,6 @@ function App() {
           options={{
             title: 'Home',
             headerStyle: {
-              textColor: Colors.black,
               backgroundColor: '#f4511e',
             },
           }}
@@ -121,9 +120,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'oldlace',
     alignSelf: 'flex-start',
-    marginHorizontal: '1%',
+    marginHorizontal: '5%',
     marginBottom: 6,
-    minWidth: '48%',
+    minWidth: '50%',
     textAlign: 'center',
   },
   buttonLabel: {
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    paddingTop: '50%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',

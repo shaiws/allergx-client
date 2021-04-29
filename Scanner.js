@@ -3,8 +3,6 @@ import { Text, View, StyleSheet } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { ProgressBar, Colors } from 'react-native-paper';
 
-
-
 function Scanner({ route, navigation }) {
     const [isBarcodeRead, setBarcodeRead] = useState(false);
     const [percentages, setPercentages] = useState(0)
@@ -18,7 +16,7 @@ function Scanner({ route, navigation }) {
                 setPercentages(percentages + 0.25)
                 const prodName = await product.json();
                 setPercentages(percentages + 0.25)
-                const response = await fetch(`http://192.168.1.230:5000/barcode?code=${e.data}`);
+                const response = await fetch(`http://296503a35747.ngrok.io/barcode?code=${e.data}`);
                 setPercentages(percentages + 0.25)
                 let allergens = await response.text()
                 if (allergens != "Not Available") {
@@ -44,8 +42,8 @@ function Scanner({ route, navigation }) {
             >
                 <Text
                     style={styles.text}>
-                    סריקת מוצר
-                    </Text>
+                    {"סריקת מוצר"}
+                </Text>
             </RNCamera>
         </View >
     );
@@ -63,7 +61,6 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: "center",
-
         flex: 1
     }
 });
