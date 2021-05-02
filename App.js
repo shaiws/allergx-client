@@ -1,24 +1,24 @@
 //import 'react-native-gesture-handler';
 import * as React from 'react';
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
-import Search from './Search';
-import Scanner from './Scanner';
-import Product from './Product';
-import Favorites from './Favorites';
+import Search from './Screens/Search';
+import Scanner from './Screens/Scanner';
+import Product from './Screens/Product';
+import Favorites from './Screens/Favorites';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { BottomNavigation } from 'react-native-paper';
 import { IconButton, Colors } from 'react-native-paper';
 
-
 const Stack = createStackNavigator();
-function Home({ navigation }) {
+function Home({ props }) {
   return (
     <View style={{ padding: 10, flex: 1 }}>
       <View style={styles.container}>
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Search')}>
+          onPress={() => props.jumpTo('Search')}>
           <Text style={styles.buttonLabel}>{'חיפוש מרשימה'}</Text>
         </TouchableOpacity>
         <IconButton
@@ -53,10 +53,13 @@ function Home({ navigation }) {
   );
 }
 
-function App() {
+function AppStackScreen(props) {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}
+        initialRouteName={props.initialRouteName}>
         <Stack.Screen
           name="Home"
           options={{
@@ -70,7 +73,7 @@ function App() {
         <Stack.Screen
           name="Search"
           options={{
-            title: 'Search',
+            title: 'Search', icon: "search-database",
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -109,6 +112,44 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+
+  );
+}
+function App() {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'Search', title: 'Search', icon: 'database-search' },
+    { key: 'Favorites', title: 'Favorites', icon: 'star' },
+
+  ]);
+  // const renderScene = BottomNavigation.SceneMap({
+  //   Home: Home,
+  //   Search: Search,
+  //   Scanner: Scanner,
+  //   Favorites: Favorites
+  // });
+  return (
+    < BottomNavigation
+      navigationState={{ index, routes }
+      }
+      onIndexChange={setIndex}
+      renderScene={({ route, jumpTo }) => {
+        switch (route.key) {
+          case 'Home':
+            return <AppStackScreen initialRouteName="Home" jumpTo={jumpTo} />;
+            break;
+          case 'Search':
+            return <AppStackScreen initialRouteName="Search" jumpTo={jumpTo} />;
+            break;
+          case 'Scanner':
+            return <AppStackScreen initialRouteName="Scanner" jumpTo={jumpTo} />;
+            break;
+          case 'Favorites':
+            return <AppStackScreen initialRouteName="Favorites" jumpTo={jumpTo} />;
+            break;
+        }
+      }}
+    />
   );
 }
 export default App;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { ProgressBar, Colors } from 'react-native-paper';
 
 function Scanner({ route, navigation }) {
@@ -16,14 +18,15 @@ function Scanner({ route, navigation }) {
                 setPercentages(percentages + 0.25)
                 const prodName = await product.json();
                 setPercentages(percentages + 0.25)
-                const response = await fetch(`http://296503a35747.ngrok.io/barcode?code=${e.data}`);
+                const response = await fetch(`http://cea2b36c994b.ngrok.io/barcode?code=${e.data}`);
                 setPercentages(percentages + 0.25)
                 let allergens = await response.text()
                 if (allergens != "Not Available") {
                     allergens = JSON.parse(allergens)
                     setPercentages(percentages + 0.25)
                 }
-                navigation.navigate("Product", { prodName: prodName.name, prodCode: e.data, prodAllergens: allergens })
+                const favorite = await isFavorite(e.data);
+                navigation.navigate("Product", { prodName: prodName.name, prodCode: e.data, prodAllergens: allergens.slice(0, allergens.length - 1), prodImage: allergens[allergens.length - 1], favorites: favorite })
             }
             catch (error) {
                 console.log(error);
@@ -48,6 +51,23 @@ function Scanner({ route, navigation }) {
         </View >
     );
 
+}
+const getData = async () => {
+    try {
+        const jsonValue = await AsyncStorage.getItem('@favorites')
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+        console.log(e);
+        // error reading value
+    }
+}
+const isFavorite = async (barcode) => {
+    const storage = await getData();
+    if (storage) {
+        const toReturn = storage[barcode] != undefined;
+        return toReturn;
+    }
+    return false;
 }
 export default Scanner
 const styles = StyleSheet.create({
