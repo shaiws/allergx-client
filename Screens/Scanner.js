@@ -18,7 +18,7 @@ function Scanner({ route, navigation }) {
                 setPercentages(percentages + 0.25)
                 const prodName = await product.json();
                 setPercentages(percentages + 0.25)
-                const response = await fetch(`http://cea2b36c994b.ngrok.io/barcode?code=${e.data}`);
+                const response = await fetch(`https://allergens-api.herokuapp.com/barcode?code=${e.data}`);
                 setPercentages(percentages + 0.25)
                 let allergens = await response.text()
                 if (allergens != "Not Available") {

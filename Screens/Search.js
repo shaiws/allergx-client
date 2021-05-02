@@ -44,7 +44,7 @@ const Search = ({ navigation }) => {
   const getItem = async (item) => {
     // Function for click on an item
     try {
-      const response = await fetch(`http://cea2b36c994b.ngrok.io/barcode?code=${item.id}`);
+      const response = await fetch(`https://allergens-api.herokuapp.com/barcode?code=${item.id}`);
       let allergens = await response.text()
       if (allergens != "Not Available")
         allergens = JSON.parse(allergens)
