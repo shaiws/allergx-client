@@ -35,11 +35,8 @@ function Product({ route, navigation }) {
         }
     }
 
-    const sortAllergens = (prodAllergens) => {
-
-    }
     return (
-        <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
+         <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
     )
 }
 
