@@ -24,7 +24,6 @@ function Home({ props }) {
         <IconButton
           icon="database-search"
           color={Colors.red500}
-
           onPress={() => navigation.navigate('Search')}
         />
         <TouchableOpacity

@@ -13,16 +13,12 @@ function Product({ route, navigation }) {
         image: prodImage,
         allergens: prodAllergens
     }
-    console.log(prodAllergens);
     const storeData = async (value) => {
         try {
             const jsonValue = JSON.stringify(value)
             await AsyncStorage.setItem('@favorites', jsonValue)
-
         } catch (e) {
             console.log(e);
-            // saving error
-
         }
     }
     const getData = async () => {
@@ -31,12 +27,11 @@ function Product({ route, navigation }) {
             return jsonValue != null ? JSON.parse(jsonValue) : null;
         } catch (e) {
             console.log(e);
-            // error reading value
         }
     }
 
     return (
-         <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
+        <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
     )
 }
 
