@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
-import { IconButton, Colors } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import MaterialCard from '../Components/MaterialCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

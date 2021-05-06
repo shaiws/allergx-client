@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 
 function ItemView(props) {
@@ -27,6 +27,8 @@ function ItemView(props) {
         case 'גלוטן ממקורות אחרים':
         case 'רכיבי גלוטן חיטה':
         case 'חיטה':
+        case 'גוסמין':
+        case 'גלוטן כוסמין':
         case 'חיטה מלאה':
         case 'גלוטן חיטה':
         case 'גלוטן שעורה':
@@ -201,6 +203,8 @@ function ItemView(props) {
                 </View>);
         case 'אגוזי פקאן':
         case 'עקבות מזעריים של אגוזי פקאן':
+        case 'עקבות של אגוזי פקאן':
+        case 'פקאן':
             return (
                 <View style={styles.allergensContainer}>
                     <Image
@@ -296,12 +300,13 @@ function ItemView(props) {
                     </Text>
                 </View>);
         case 'פיסטוק':
+        case 'פיסטוק חלאבי':
             return (
                 <View style={styles.allergensContainer}>
                     <Image
                         style={styles.allergenImage}
                         tintColor='red'
-                        source={require('../assets/gluten-free.png')}
+                        source={require('../assets/pistachio.png')}
                     />
                     <Text
                         style={styles.bodyText}
@@ -422,7 +427,8 @@ function ItemView(props) {
                     >
                         {props.prod}
                     </Text>
-                </View>);
+                </View>
+            );
 
         case 'עדשים': return (
             <View style={styles.allergensContainer}>
@@ -434,11 +440,11 @@ function ItemView(props) {
                 <Text
                     style={styles.bodyText}
                 >
-                    {' ' + item + ' '}
+                    {props.prod}
                 </Text>
-          )
             </View>
-        );
+        )
+
         case 'תורמוס':
             return (
                 <View style={styles.allergensContainer}>
@@ -491,41 +497,43 @@ function ItemView(props) {
                     />
                     <Text style={styles.bodyText} >{props.prod} </Text>
                 </View>);
-        case 'ללא צבעי מאכל':
-        case 'ללא צבעי מאכל מלאכותי':
-        case 'צבעי מאכל טבעיים':
-        case 'מוצר דייאט':
-        case 'עשיר בחלבונים':
-        case 'ללא חומרים משמרים':
-        case 'ללא תוספת קמח':
-        case 'ללא קזאין':
-        case 'ללא מונוסודיום גלוטמט':
-        case 'ללא קרמל':
-        case 'ללא מרכיבים מהחי':
-        case 'לייט':
-        case 'מכיל סיבים תזונתיים':
-        case 'חומרים טבעיים בלבד':
-        case 'חקלאות ישראלית':
-        case 'טבעוני':
-        case 'ללא חומצות שומן טרנס':
-        case 'עשיר בדגנים מלאים':
-        case 'תו האגודה הישראלית לסוכרת':
-        case 'צמחוני':
-        case 'אורגני':
-        case 'בתוספת ויטמין':
-        case 'מכיל סידן':
-        case 'דל קלוריות':
-        case 'ויטמין':
-        case 'טבעי':
-        case 'חומרי טעם וריח טבעיים':
-        case 'ללא חומרי טעם':
-        case "ללא צבע וללא משמר":
-        case 'אפוי':
-        case 'לא מטוגן':
-        case 'כחול לבן':
-        case 'אפוי ולא מטוגן':
-            // return <View style={[styles.item, styles.itemInvisible]} />;
-            return null;
+        // case 'ללא צבעי מאכל':
+        // case 'ללא צבעי מאכל מלאכותי':
+        // case 'צבעי מאכל טבעיים':
+        // case 'מוצר דייאט':
+        // case 'עשיר בחלבונים':
+        // case 'ללא חומרים משמרים':
+        // case 'ללא תוספת קמח':
+        // case 'ללא קזאין':
+        // case 'ללא מונוסודיום גלוטמט':
+        // case 'ללא קרמל':
+        // case 'ללא מרכיבים מהחי':
+        // case 'לייט':
+        // case 'מכיל סיבים תזונתיים':
+        // case 'חומרים טבעיים בלבד':
+        // case 'חקלאות ישראלית':
+        // case 'טבעוני':
+        // case 'ללא חומצות שומן טרנס':
+        // case 'עשיר בדגנים מלאים':
+        // case 'תו האגודה הישראלית לסוכרת':
+        // case 'צמחוני':
+        // case 'אורגני':
+        // case 'בתוספת ויטמין':
+        // case 'מכיל סידן':
+        // case 'דל קלוריות':
+        // case 'ויטמין':
+        // case 'טבעי':
+        // case 'חומרי טעם וריח טבעיים':
+        // case 'ללא חומרי טעם':
+        // case "ללא צבע וללא משמר":
+        // case 'אפוי':
+        // case 'לא מטוגן':
+        // case 'כחול לבן':
+        // case 'עשיר בויטמין':
+        // case 'מפוסטר':
+        // case 'אפוי ולא מטוגן':
+        // return <View style={[styles.item, styles.itemInvisible]} />;
+        // return null;
         default:
             return (
                 <Text style={styles.bodyText}>
@@ -547,20 +555,17 @@ const styles = StyleSheet.create({
     },
     bodyText: {
         lineHeight: 20,
-        fontSize: 14,
+        fontSize: 16,
         color: '#424242',
         flex: 1,
         textAlign: 'center',
-
     },
     allergenImage: {
 
     },
     allergensContainer: {
         height: Dimensions.get('window').width / 3,
-        //backgroundColor: '#6495ED',
         alignItems: 'center',
-        justifyContent: 'center',
         flex: 1,
         margin: 1,
     }

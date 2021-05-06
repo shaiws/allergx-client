@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,19 +6,29 @@ import ItemView from './ItemView';
 
 deleteData = (data) => {
 
-  for (let i = 0; i < data.length; i++) {
-    if (data[i] == 'ללא צבעי מאכל' || data[i] == 'ללא צבעי מאכל מלאכותי' || data[i] == 'צבעי מאכל טבעיים' || data[i] == 'מוצר דייאט' || data[i] ==
-      'עשיר בחלבונים' || data[i] == 'ללא חומרים משמרים' || data[i] == 'ללא תוספת קמח' || data[i] == 'ללא קזאין' || data[i] == 'ללא מונוסודיום גלוטמט' ||
-      data[i] == 'ללא קרמל' || data[i] == 'ללא מרכיבים מהחי' || data[i] == 'לייט' || data[i] == 'מכיל סיבים תזונתיים' || data[i] == 'חומרים טבעיים בלבד' ||
-      data[i] == 'חקלאות ישראלית' || data[i] == 'טבעוני' || data[i] == 'ללא חומצות שומן טרנס' || data[i] == 'עשיר בדגנים מלאים' || data[i] == 'תו האגודה הישראלית לסוכרת' ||
+  for (let i = data.length - 1; i >= 0; --i) {
+    if (
+      data[i] == 'ללא צבעי מאכל מלאכותי' || data[i] == 'צבעי מאכל טבעיים' || data[i] == 'מוצר דייאט' || data[i] == 'עשיר בחלבונים' ||
+      data[i] == 'ללא חומרים משמרים' || data[i] == 'ללא תוספת קמח' || data[i] == 'ללא קזאין' || data[i] == 'ללא מונוסודיום גלוטמט' ||
+      data[i] == 'ללא קרמל' || data[i] == 'ללא מרכיבים מהחי' || data[i] == 'לייט' || data[i] == 'מכיל סיבים תזונתיים' ||
+      data[i] == 'חומרים טבעיים בלבד' || data[i] == 'חקלאות ישראלית' || data[i] == 'ללא צבעי מאכל' || data[i] == 'טבעוני' ||
+      data[i] == 'ללא חומצות שומן טרנס' || data[i] == 'עשיר בדגנים מלאים' || data[i] == 'תו האגודה הישראלית לסוכרת' ||
       data[i] == 'צמחוני' || data[i] == 'אורגני' || data[i] == 'בתוספת ויטמין' || data[i] == 'מכיל סידן' || data[i] == 'דל קלוריות' || data[i] == 'ויטמין' ||
       data[i] == 'טבעי' || data[i] == 'חומרי טעם וריח טבעיים' || data[i] == 'ללא חומרי טעם' || data[i] == "ללא צבע וללא משמר" || data[i] == 'אפוי' ||
-      data[i] == 'לא מטוגן' || data[i] == 'כחול לבן' || data[i] == 'אפוי ולא מטוגן' || data[i] == 'עשיר בסיבים תזונתיים' || data[i] == 'טבעי') {
+      data[i] == 'לא מטוגן' || data[i] == 'כחול לבן' || data[i] == 'אפוי ולא מטוגן' || data[i] == 'עשיר בסיבים תזונתיים' || data[i] == 'טבעי' ||
+      data[i] == 'מפסוטר' || data[i] == 'עשיר בויטמין'
+    ) {
       data.splice(i, 1);
     }
+
+  }
+
+  if (data.length == 0) {
+    data.push("לא ידוע על אלרגנים למוצר זה. יש לבדוק על גבי האריזה");
   }
   return data;
 }
+
 
 formatRow = (data, numColumns) => {
   data = deleteData(data);
@@ -148,15 +158,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#424242',
   },
-  allergenImage: {
-
-  },
-  allergensContainer: {
-
-  },
   list: {
     flex: 1,
-    marginVertical: 20,
+    marginVertical: 10,
+
   }
 });
 

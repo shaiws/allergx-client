@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { I18nManager, SafeAreaView, TouchableOpacity, StyleSheet, View, FlatList } from 'react-native';
-import { IconButton, Colors, Divider, Searchbar } from 'react-native-paper';
+import { SafeAreaView, TouchableOpacity, StyleSheet, View, FlatList } from 'react-native';
+import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import { FAB } from 'react-native-paper';
@@ -76,7 +76,9 @@ const Search = ({ navigation }) => {
       <View style={styles.container}>
         <Searchbar
 
-          style={{ borderRadius: 80, margin: 10 }}
+          style={{
+            borderRadius: 80, margin: 10, flexDirection: 'row', justifyContent: 'center', direction: 'row',
+          }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
           placeholder="חיפוש..."

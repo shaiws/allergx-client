@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, SafeAreaView, FlatList, Image } from 'react-native';
-import { IconButton, Colors, Divider } from 'react-native-paper';
+import {  View, StyleSheet, SafeAreaView, FlatList, Image } from 'react-native';
+import { IconButton} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 

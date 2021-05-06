@@ -1,4 +1,3 @@
-//import 'react-native-gesture-handler';
 import * as React from 'react';
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 import Search from './Screens/Search';

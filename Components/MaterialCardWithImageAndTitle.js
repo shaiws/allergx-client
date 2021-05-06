@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text, Image} from "react-native";
 
 function MaterialCardWithImageAndTitle(props) {
   return (
