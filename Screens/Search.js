@@ -14,7 +14,7 @@ const Search = ({ navigation }) => {
     // Check if searched text is not blank
     if (text) {
       // Update FilteredDataSource
-      fetch(`http://api.imri.ga/items?name=${text}`)
+      fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
         .then(data => { setFilteredDataSource(data) })
         .catch(function () {
@@ -34,9 +34,10 @@ const Search = ({ navigation }) => {
       <TouchableOpacity onPress={() => getItem(item)}>
         <MaterialCardWithImageAndTitle
           style={styles.materialCardWithImageAndTitle}
-          image='https://reactnative.dev/img/tiny_logo.png'
+          image={item.image}
           prodName={item.name}
-          prodCode={item.id} />
+          // prodAllergens={item.allergens}
+          prodCode={item.barcode} />
       </TouchableOpacity>
     );
   };
@@ -44,13 +45,8 @@ const Search = ({ navigation }) => {
   const getItem = async (item) => {
     // Function for click on an item
     try {
-      const response = await fetch(`https://allergens-api.herokuapp.com/barcode?code=${item.id}`);
-      let allergens = await response.text()
-      if (allergens != "Not Available")
-        allergens = JSON.parse(allergens)
-      console.log(allergens);
       const favorite = await isFavorite(item.id);
-      await navigation.navigate("Product", { prodName: item.name, prodCode: item.id, prodAllergens: allergens.slice(0, allergens.length - 1), prodImage: allergens[allergens.length - 1], favorites: favorite })
+      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodImage: item.image, favorites: favorite })
     }
     catch (error) {
       console.log(error);
@@ -89,13 +85,13 @@ const Search = ({ navigation }) => {
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
-          //ItemSeparatorComponent={ItemSeparatorView}
+          ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
           renderItem={ItemView}
         />
         <FAB
           style={styles.fab}
           icon="barcode"
-          color={Colors.grey300}
+          color="black"
           onPress={() => navigation.navigate("Scanner")}
         />
       </View>
@@ -106,6 +102,7 @@ const Search = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: '2%',
     backgroundColor: 'white',
   },
   itemStyle: {
@@ -114,13 +111,15 @@ const styles = StyleSheet.create({
   },
   materialCardWithImageAndTitle: {
     margin: 10,
+    //borderRadius: 50
 
   },
   fab: {
     position: 'absolute',
     margin: 16,
-    right: 0,
-    bottom: 0
+    alignSelf: 'flex-start',
+    bottom: 0,
+    backgroundColor: 'white'
   },
 });
 

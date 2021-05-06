@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,19 +14,36 @@ function Scanner({ route, navigation }) {
             setPercentages(0)
             setBarcodeRead(true);
             try {
-                const product = await fetch(`http://api.imri.ga/items/${e.data}`);
+                const product = await fetch(`https://allergens-api.herokuapp.com/barcode?code=${e.data}`);
+                console.log(product);
                 setPercentages(percentages + 0.25)
-                const prodName = await product.json();
+                const prodJson = await product.json();
+                console.log(prodJson);
                 setPercentages(percentages + 0.25)
-                const response = await fetch(`https://allergens-api.herokuapp.com/barcode?code=${e.data}`);
-                setPercentages(percentages + 0.25)
-                let allergens = await response.text()
-                if (allergens != "Not Available") {
-                    allergens = JSON.parse(allergens)
+                if (prodJson != -1) {
+                    let allergens = await prodJson[0]['allergens']
                     setPercentages(percentages + 0.25)
+                    const favorite = await isFavorite(e.data);
+                    navigation.navigate("Product", { prodName: prodJson[0]['name'], prodCode: e.data, prodAllergens: allergens, prodImage: prodJson[0]['image'], favorites: favorite });
+                    setBarcodeRead(false);
+                    setPercentages(0);
                 }
-                const favorite = await isFavorite(e.data);
-                navigation.navigate("Product", { prodName: prodName.name, prodCode: e.data, prodAllergens: allergens.slice(0, allergens.length - 1), prodImage: allergens[allergens.length - 1], favorites: favorite })
+                else {
+                    Alert.alert(
+                        "המוצר אינו נמצא",
+                        "המוצר לא נמצא במאגר המידע שלנו כרגע.\nאנחנו עובדים על זה.",
+                        [
+                            {
+                                text: "אישור",
+                                onPress: () => {
+                                    setBarcodeRead(false);
+                                    setPercentages(0);
+                                },
+                                style: "cancel"
+                            }
+                        ]
+                    )
+                }
             }
             catch (error) {
                 console.log(error);

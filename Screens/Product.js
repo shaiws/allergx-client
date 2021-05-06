@@ -13,6 +13,7 @@ function Product({ route, navigation }) {
         image: prodImage,
         allergens: prodAllergens
     }
+    console.log(prodAllergens);
     const storeData = async (value) => {
         try {
             const jsonValue = JSON.stringify(value)
@@ -21,6 +22,7 @@ function Product({ route, navigation }) {
         } catch (e) {
             console.log(e);
             // saving error
+
         }
     }
     const getData = async () => {
@@ -33,9 +35,11 @@ function Product({ route, navigation }) {
         }
     }
 
+    const sortAllergens = (prodAllergens) => {
 
+    }
     return (
-        <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={prodAllergens} image={prodImage} style={styles.materialCard}></MaterialCard>
+        <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
     )
 }
 
@@ -43,7 +47,7 @@ export default Product;
 
 const styles = StyleSheet.create({
     materialCard: {
-        height: '80%',
+        height: '90%',
         margin: 20
     }
 });
