@@ -10,7 +10,7 @@ const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
 
-  const searchFilterFunction = (text) => {
+  const searchFilterFunction = async (text) => {
     // Check if searched text is not blank
     if (text) {
       // Update FilteredDataSource
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     margin: 16,
-    alignSelf: 'flex-start',
+    right: 0,
     bottom: 0,
     backgroundColor: 'white'
   },
