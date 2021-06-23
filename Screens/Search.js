@@ -12,7 +12,7 @@ const Search = ({ navigation }) => {
 
   const searchFilterFunction = async (text) => {
     // Check if searched text is not blank
-    if (text) {
+    if (text && text.length >= 3) {
       // Update FilteredDataSource
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())

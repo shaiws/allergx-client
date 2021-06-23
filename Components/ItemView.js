@@ -65,6 +65,7 @@ function ItemView(props) {
             break;
 
         case 'בוטנים':
+            case 'בוןטנים':
         case 'חמאת בוטנים':
         case 'שומשום ובוטנים':
         case 'עקבות מזעריים של בוטנים':
@@ -149,6 +150,7 @@ function ItemView(props) {
 
         case 'אגוזים':
         case 'אגוזים ':
+        case 'סויה ואגוזים':
         case 'צנוברים':
         case 'עקבות מזעריים של צנוברים':
         case 'שאריות של אגוזים':
@@ -181,6 +183,7 @@ function ItemView(props) {
             break;
 
         case 'שקדים':
+        case 'שקד':
         case 'עקבות מזעריים של שקדים':
         case 'עקבות של שקדים':
             color = "red"
@@ -197,6 +200,7 @@ function ItemView(props) {
             break;
 
         case 'אגוז ברזיל':
+        case 'ברזיל':
         case 'אגוז היקורי':
         case 'אגוזי ברזיל':
         case 'עקבות של אגוזי היקורי':
@@ -245,6 +249,7 @@ function ItemView(props) {
             break;
 
         case 'שומשום':
+        case 'סויה ושומשום':
         case 'עקבות של שומשום':
         case 'שומשום ובוטנים':
         case 'שאריות של שומשום':

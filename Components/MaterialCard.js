@@ -31,14 +31,18 @@ function MaterialCard(props) {
 
   return (
     <View style={[styles.container, props.style]}>
+
       <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
+
       <View style={styles.bodyContent}>
-        <View style={{ flexDirection: 'row', flex: 1 }}>
+
+        <View style={{ flexDirection: 'row' }}>
           <Text style={styles.titleStyle}>{props.name}</Text>
         </View>
         <Text style={styles.subtitleStyle}>{props.code}</Text>
+
       </View>
-      <View style={styles.allergensContainer}>
+      <View style={[styles.allergensContainer, { flex: 4 }]}>
         <Text style={{
           fontSize: 18,
           color: "#000",
@@ -51,16 +55,19 @@ function MaterialCard(props) {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
         />
+
+      </View>
+      <View style={styles.warning}>
         <FAB
           style={styles.fab}
           icon="arrow-left"
           color="black"
           onPress={() => props.nav.goBack(null)}
         />
+        <ScrollView >
+          <Text >{'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש'}</Text>
+        </ScrollView>
       </View>
-      <ScrollView style={styles.warning}>
-        <Text>{'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש'}</Text>
-      </ScrollView>
     </View >
   );
 }
@@ -70,10 +77,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 20,
-    borderColor: '#CCC',
+    borderColor: '#abcdef',
     flexWrap: 'nowrap',
     backgroundColor: '#FFF',
-    shadowColor: '#000',
+    shadowColor: '#abcdef',
     shadowOffset: {
       width: -2,
       height: 2,
@@ -103,6 +110,8 @@ const styles = StyleSheet.create({
     flex: 10,
     fontSize: 20,
     alignSelf: 'flex-start',
+    color: '#000',
+    // paddingBottom: 12,
 
   },
   subtitleStyle: {
@@ -124,7 +133,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   allergensContainer: {
-    flex: 4,
+
     padding: 16,
     paddingTop: -16,
     alignSelf: 'stretch'
@@ -134,11 +143,12 @@ const styles = StyleSheet.create({
   },
   warning: {
     flex: 1,
-    padding: 3
+    flexDirection: 'row-reverse',
+    padding: 5
   },
   fab: {
-    position: 'absolute',
-    margin: 16,
+    // position: 'absolute',
+    margin: 15,
     right: 0,
     bottom: 0,
     backgroundColor: 'white'

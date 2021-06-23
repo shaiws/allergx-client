@@ -1,4 +1,4 @@
-package com.allergens;
+package com.shaiws.allergx;
 
 import android.app.Application;
 import android.content.Context;
@@ -66,7 +66,7 @@ sharedI18nUtilInstance.allowRTL(this, true);
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.allergens.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.shaiws.allergx.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

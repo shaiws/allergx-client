@@ -67,9 +67,9 @@ function AppStackScreen(props) {
 }
 function App() {
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'Search', title: 'חיפוש', icon: 'database-search' },
-  ]);
+  const routes = [
+    { key: 'Search', title: 'חיפוש', icon: 'database-search', color: '#3F51B5' },
+  ];
 
   return (
     < BottomNavigation
@@ -78,14 +78,8 @@ function App() {
       onIndexChange={setIndex}
       renderScene={({ route, jumpTo }) => {
         switch (route.key) {
-          case 'Home':
-            return <AppStackScreen initialRouteName="Home" jumpTo={jumpTo} />;
           case 'Search':
             return <AppStackScreen initialRouteName="Search" jumpTo={jumpTo} />;
-          case 'Scanner':
-            return <AppStackScreen initialRouteName="Scanner" jumpTo={jumpTo} />;
-          // case 'Favorites':
-          //   return <AppStackScreen initialRouteName="Favorites" jumpTo={jumpTo} />;
         }
       }}
     />

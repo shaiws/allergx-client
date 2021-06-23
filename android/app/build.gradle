@@ -129,9 +129,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions { javaMaxHeapSize "2g" }
 
     defaultConfig {
-        applicationId "com.allergens"
+        applicationId "com.shaiws.allergx"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         missingDimensionStrategy 'react-native-camera', 'general'
