@@ -49,7 +49,6 @@ const Search = ({ navigation }) => {
       await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodImage: item.image, favorites: favorite })
     }
     catch (error) {
-      console.log(error);
       alert("Check your internet connection");
     }
   };
@@ -58,7 +57,6 @@ const Search = ({ navigation }) => {
       const jsonValue = await AsyncStorage.getItem('@favorites')
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
-      console.log(e);
       // error reading value
     }
   }

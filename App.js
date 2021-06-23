@@ -10,46 +10,6 @@ import { BottomNavigation } from 'react-native-paper';
 import { IconButton, Colors } from 'react-native-paper';
 
 const Stack = createStackNavigator();
-function Home({ props }) {
-  return (
-    <View style={{ padding: 10, flex: 1 }}>
-      <View style={styles.container}>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => props.jumpTo('Search')}>
-          <Text style={styles.buttonLabel}>{'חיפוש מרשימה'}</Text>
-        </TouchableOpacity>
-        <IconButton
-          icon="database-search"
-          color={Colors.red500}
-          onPress={() => navigation.navigate('Search')}
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Scanner')}>
-          <Text style={styles.buttonLabel}>{'סריקת ברקוד'}</Text>
-        </TouchableOpacity>
-        <IconButton
-          icon="barcode"
-          color={Colors.red500}
-
-          onPress={() => navigation.navigate('Scanner')}
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Favorites')}>
-          <Text style={styles.buttonLabel}>{'מועדפים'}</Text>
-        </TouchableOpacity>
-        <IconButton
-          icon="star"
-          color={Colors.red500}
-          onPress={() => navigation.navigate('Favorites')}
-        />
-      </View>
-    </View>
-  );
-}
 
 function AppStackScreen(props) {
   return (
@@ -59,19 +19,11 @@ function AppStackScreen(props) {
       }}
         initialRouteName={props.initialRouteName}>
         <Stack.Screen
-          name="Home"
-          options={{
-            title: 'Home',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-          }}
-          component={Home}
-        />
-        <Stack.Screen
           name="Search"
+
           options={{
-            title: 'Search', icon: "search-database",
+
+            title: 'חיפוש', icon: "search-database",
             headerStyle: {
               backgroundColor: '#f4511e',
             },
@@ -98,7 +50,7 @@ function AppStackScreen(props) {
           }}
           component={Product}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Favorites"
           options={{
             title: 'Favorites',
@@ -107,7 +59,7 @@ function AppStackScreen(props) {
             },
           }}
           component={Favorites}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
 
@@ -116,16 +68,9 @@ function AppStackScreen(props) {
 function App() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'Search', title: 'Search', icon: 'database-search' },
-    { key: 'Favorites', title: 'Favorites', icon: 'star' },
-
+    { key: 'Search', title: 'חיפוש', icon: 'database-search' },
   ]);
-  // const renderScene = BottomNavigation.SceneMap({
-  //   Home: Home,
-  //   Search: Search,
-  //   Scanner: Scanner,
-  //   Favorites: Favorites
-  // });
+
   return (
     < BottomNavigation
       navigationState={{ index, routes }
@@ -135,16 +80,12 @@ function App() {
         switch (route.key) {
           case 'Home':
             return <AppStackScreen initialRouteName="Home" jumpTo={jumpTo} />;
-            break;
           case 'Search':
             return <AppStackScreen initialRouteName="Search" jumpTo={jumpTo} />;
-            break;
           case 'Scanner':
             return <AppStackScreen initialRouteName="Scanner" jumpTo={jumpTo} />;
-            break;
-          case 'Favorites':
-            return <AppStackScreen initialRouteName="Favorites" jumpTo={jumpTo} />;
-            break;
+          // case 'Favorites':
+          //   return <AppStackScreen initialRouteName="Favorites" jumpTo={jumpTo} />;
         }
       }}
     />

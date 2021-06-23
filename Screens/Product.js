@@ -12,25 +12,26 @@ function Product({ route, navigation }) {
         image: prodImage,
         allergens: prodAllergens
     }
-    const storeData = async (value) => {
-        try {
-            const jsonValue = JSON.stringify(value)
-            await AsyncStorage.setItem('@favorites', jsonValue)
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    const getData = async () => {
-        try {
-            const jsonValue = await AsyncStorage.getItem('@favorites')
-            return jsonValue != null ? JSON.parse(jsonValue) : null;
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    // const storeData = async (value) => {
+    //     try {
+    //         const jsonValue = JSON.stringify(value)
+    //         await AsyncStorage.setItem('@favorites', jsonValue)
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+    // const getData = async () => {
+    //     try {
+    //         const jsonValue = await AsyncStorage.getItem('@favorites')
+    //         return jsonValue != null ? JSON.parse(jsonValue) : null;
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 
     return (
-        <MaterialCard name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
+        
+        <MaterialCard nav={navigation} name={prodName} code={prodCode} favorite={favorites} allergens={(prodAllergens.sort())} image={prodImage} style={styles.materialCard} />
     )
 }
 

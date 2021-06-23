@@ -5,6 +5,7 @@ function ItemView(props) {
     if (props.prod == null) {
         return <View style={[styles.item, styles.itemInvisible]} />;
     }
+    let image, color;
     switch (props.prod) {
         case 'ללא גלוטן':
         case 'נטול גלוטן':
@@ -13,19 +14,9 @@ function ItemView(props) {
         case 'אינו מכיל חיטה':
         case 'ללא שיפון':
         case 'ללא שעורה':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/gluten-free.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/gluten-free.png");
+            break;
 
         case 'גלוטן':
         case 'גלוטן ממקורות אחרים':
@@ -53,84 +44,34 @@ function ItemView(props) {
         case 'גלוטן שיפון':
         case 'שיפון':
         case 'עקבות מזעריים של שיפון':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/gluten.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/gluten.png");
+            break;
 
         case 'קקאו':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/cacao.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
-
+            color = "red"
+            image = require("../assets/cacao.png");
+            break;
         case 'ללא לקטוז':
         case 'דל לקטוז':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/lactose-free.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/lactose-free.png");
+            break;
 
         case 'לקטוז':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/lactose-free.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/lactose-free.png");
+
+            break;
 
         case 'בוטנים':
         case 'חמאת בוטנים':
         case 'שומשום ובוטנים':
         case 'עקבות מזעריים של בוטנים':
         case 'עקבות של בוטנים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/peanut.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/peanut.png");
+            break;
 
         case 'ביצים':
         case 'חלבון ביצה':
@@ -139,98 +80,40 @@ function ItemView(props) {
         case 'עקבות מזעריים של ביצים':
         case 'וביצים':
         case 'עקבות של ביצים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/eggs.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod == 'וביצים' ? 'ביצים' : props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/eggs.png");
+            break;
 
         case 'ללא ביצים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/eggs.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/eggs.png");
+            break;
 
         case 'חרדל':
         case 'עקבות של חרדל':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/mustard.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
-
+            color = "red"
+            image = require("../assets/mustard.png");
+            break;
 
         case 'דבש':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/honey.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/honey.png");
+            break;
+
         case 'סלרי':
         case 'עקבות של סלרי':
         case 'שורש סלרי':
         case 'עקבות מזעריים של סלרי':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/celery.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/celery.png");
+            break;
+
         case 'ללא שיבולת שועל וסויה':
         case 'ללא סויה':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/soy.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/soy.png");
+            break;
+
         case 'סויה':
         case 'עקבות מזעריים של סויה':
         case 'עקבות של סויה':
@@ -239,19 +122,9 @@ function ItemView(props) {
         case 'חלבון סויה':
         case 'רכיבי מחלב וסויה':
         case 'שמן מסויה':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/soy.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/soy.png");
+            break;
 
         case 'חלב':
         case 'מוצקי חלב':
@@ -265,34 +138,14 @@ function ItemView(props) {
         case 'חלב וסויה':
         case 'חלב עיזים':
         case 'עקבות מזעריים של חלב':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/milk.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/milk.png");
+            break;
 
         case 'ללא חלב':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/milk.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/milk.png");
+            break;
 
         case 'אגוזים':
         case 'אגוזים ':
@@ -308,178 +161,78 @@ function ItemView(props) {
         case 'עקבות של אגוזים ושקדים':
         case 'עקבות אגוזים שונים':
         case 'אגוזים אחרים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/nuts.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/nuts.png");
+            break;
 
         case 'אגוזי פקאן':
         case 'עקבות מזעריים של אגוזי פקאן':
         case 'עקבות של אגוזי פקאן':
         case 'פקאן':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/pecan.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/pecan.png");
+            break;
 
         case 'אגוזי קשיו':
         case 'עקבות של אגוזי קשיו':
         case 'קשיו':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/cashew.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/cashew.png");
+            break;
 
         case 'שקדים':
         case 'עקבות מזעריים של שקדים':
         case 'עקבות של שקדים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/almond.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/almond.png");
+            break;
 
         case 'לוז':
         case 'אגוזי לוז':
         case 'עקבות מזעריים של אגוזי לוז':
         case 'עקבות של אגוזי לוז':
         case 'שברי אגוזי לוז':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/hazelnuts.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/hazelnuts.png");
+            break;
 
         case 'אגוז ברזיל':
         case 'אגוז היקורי':
         case 'אגוזי ברזיל':
         case 'עקבות של אגוזי היקורי':
         case 'עקבות של אגוזי ברזיל':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/brazil-nuts.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/brazil-nuts.png");
+            break;
 
         case 'אגוזי מלך':
         case 'מלך':
         case 'עקבות מזעריים של אגוזי מלך':
         case 'עקבות של אגוזי מלך':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/walnuts.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/walnuts.png");
+            break;
 
         case 'פיסטוק':
         case 'עקבות של פיסטוק':
         case 'פיסטוק חאלבי':
         case 'פיסטוק חלאבי':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/pistachio.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/pistachio.png");
+            break;
 
         case 'ללא שיבולת שועל וסויה':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/oatmeal.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/oatmeal.png");
+            break;
 
         case 'מקדמיה':
         case 'אגוזי מקדמיה':
         case 'עקבות של אגוזי מקדמיה':
         case 'מאקדמיה':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/macadamia.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/macadamia.png");
+            break;
 
         case 'אגוזי קוקוס':
         case 'קוקוס':
@@ -487,196 +240,77 @@ function ItemView(props) {
         case 'חלב וקוקוס':
         case 'חלב קוקוס':
         case 'עקבות של אגוזי קוקוס':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/coconut.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/coconut.png");
+            break;
 
         case 'שומשום':
         case 'עקבות של שומשום':
         case 'שומשום ובוטנים':
         case 'שאריות של שומשום':
         case 'עקבות מזעריים של שומשום':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/sesame.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/sesame.png");
+            break;
 
         case 'פנילאלינין':
         case 'סולפיט':
         case 'לציטין סויה':
         case 'ביסולפיט':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/sulphate.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/sulphate.png");
+            break;
         case 'ללא תוספת סוכר':
         case 'ללא סוכר':
         case 'ללא ממתיקים מלאכותיים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/sugar-free.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/sugar-free.png");
+            break;
 
         case 'דגים':
         case 'גלטין דגים':
         case 'מכיל אומגה':
         case 'עקבות מזעריים של גלטין דגים':
-
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/fish.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/fish.png");
+            break;
         case 'פול':
-
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/bean.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>
-            );
+            color = "red"
+            image = require("../assets/bean.png");
+            break;
 
         case 'ערמונים':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/chestnut.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>
-            );
+            color = "red"
+            image = require("../assets/chestnut.png");
+            break;
 
         case 'עדשים':
-
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/lentils.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>
-            )
+            color = "red"
+            image = require("../assets/lentils.png");
+            break;
 
         case 'תורמוס':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/lupine.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "red"
+            image = require("../assets/lupine.png");
+            break;
 
         case 'ללא שומן טראנס':
         case 'דל שומן':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/trans.png')}
-                    />
-                    <Text
-                        style={styles.bodyText}
-                    >
-                        {props.prod}
-                    </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/trans.png");
+            break;
 
         case 'ללא כולסטרול':
         case 'דל כולסטרול':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='green'
-                        source={require('../assets/cholesterol.png')}
-                    />
-                    <Text style={styles.bodyText} >{props.prod} </Text>
-                </View>);
+            color = "green"
+            image = require("../assets/cholesterol.png");
+            break;
         case 'גרעינים':
         case 'שיירי גרעיני אגס':
         case 'שיירי גרעיני תפוח':
-            return (
-                <View style={styles.allergensContainer}>
-                    <Image
-                        style={styles.allergenImage}
-                        tintColor='red'
-                        source={require('../assets/seeds.png')}
-                    />
-                    <Text style={styles.bodyText} >{props.prod} </Text>
-                </View>);
-
+            color = "red"
+            image = require("../assets/seeds.png");
+            break;
         default:
             return (
                 <Text style={styles.bodyText}>
@@ -684,6 +318,20 @@ function ItemView(props) {
                 </Text>
             );
     }
+    return (
+        <View style={styles.allergensContainer}>
+            <Image
+                style={styles.allergenImage}
+                tintColor={color}
+                source={image}
+            />
+            <Text
+                style={styles.bodyText}
+            >
+                {props.prod}
+            </Text>
+        </View>);
+
 }
 const styles = StyleSheet.create({
     item: {
