@@ -1,10 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemView from './ItemView';
-import { FAB } from 'react-native-paper';
-
 
 deleteData = (data) => {
   if (data.length == 0) {
@@ -26,9 +22,6 @@ formatRow = (data, numColumns) => {
 }
 
 function MaterialCard(props) {
-  const [favorite, setFavorite] = React.useState(props.favorite);
-
-
   return (
     <View style={[styles.container, props.style]}>
 
@@ -57,17 +50,10 @@ function MaterialCard(props) {
         />
 
       </View>
-      <View style={styles.warning}>
-        <FAB
-          style={styles.fab}
-          icon="arrow-left"
-          color="black"
-          onPress={() => props.nav.goBack(null)}
-        />
-        <ScrollView >
-          <Text >{'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש'}</Text>
-        </ScrollView>
-      </View>
+
+      <ScrollView style={styles.warning}>
+        <Text >{'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש'}</Text>
+      </ScrollView>
     </View >
   );
 }
@@ -143,16 +129,9 @@ const styles = StyleSheet.create({
   },
   warning: {
     flex: 1,
-    flexDirection: 'row-reverse',
     padding: 5
   },
-  fab: {
-    // position: 'absolute',
-    margin: 15,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'white'
-  },
+
 });
 
 export default MaterialCard;
