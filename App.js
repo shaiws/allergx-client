@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+
 import { StyleSheet, Alert, BackHandler, View } from 'react-native';
 import Search from './Screens/Search';
 import Scanner from './Screens/Scanner';
@@ -8,7 +10,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { BottomNavigation } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RNRestart from 'react-native-restart';
-
 
 const Stack = createStackNavigator();
 
@@ -93,8 +94,7 @@ function App() {
   if (!loaded) {
     return null;
   }
-  else
-    console.log(agreed);
+  
 
   if (!agreed && loaded) {
     Alert.alert(

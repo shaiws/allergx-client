@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
 
+
 function ItemView(props) {
     if (props.prod == null) {
         return <View style={[styles.item, styles.itemInvisible]} />;
@@ -65,7 +66,7 @@ function ItemView(props) {
             break;
 
         case 'בוטנים':
-            case 'בוןטנים':
+        case 'בוןטנים':
         case 'חמאת בוטנים':
         case 'שומשום ובוטנים':
         case 'עקבות מזעריים של בוטנים':
@@ -326,8 +327,7 @@ function ItemView(props) {
     return (
         <View style={styles.allergensContainer}>
             <Image
-                style={styles.allergenImage}
-                tintColor={color}
+                style={{ tintColor: color }}
                 source={image}
             />
             <Text
@@ -356,9 +356,7 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
     },
-    allergenImage: {
 
-    },
     allergensContainer: {
         height: Dimensions.get('window').width / 3,
         alignItems: 'center',

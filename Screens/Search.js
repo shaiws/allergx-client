@@ -75,7 +75,7 @@ const Search = ({ navigation }) => {
         <Searchbar
 
           style={{
-            borderRadius: 80, margin: 10, flexDirection: 'row', justifyContent: 'center', direction: 'row',
+            borderRadius: 80, margin: 10, flexDirection: 'row', justifyContent: 'center'
           }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
@@ -111,8 +111,6 @@ const styles = StyleSheet.create({
   },
   materialCardWithImageAndTitle: {
     margin: 10,
-    //borderRadius: 50
-
   },
   fab: {
     position: 'absolute',

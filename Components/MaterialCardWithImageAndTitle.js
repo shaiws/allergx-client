@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
   },
   bodyContent: {
     padding: 16,
-    //paddingTop: 24,
     flex: 1,
   },
   titleStyle: {
+    writingDirection: 'rtl',
     fontSize: 24,
     flex: 1,
     color: '#000',
@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     opacity: 0.5,
     alignSelf: 'flex-start',
+    writingDirection: 'rtl',
+
   },
   cardItemImagePlace: {
     backgroundColor: '#ccc',
