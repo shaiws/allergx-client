@@ -3,18 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* allergxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* allergxTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		57DAE38A38D5F8DA8D3A0860 /* libPods-allergx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD945A52084478C4C5DA75 /* libPods-allergx.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B4C4563954DE7FD03EF171E8 /* libPods-allergx-allergxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F25EE787079FB2321BC0D93C /* libPods-allergx-allergxTests.a */; };
-		F6F23A8E26B5FBA6008A162E /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = F6F23A8D26B5FBA5008A162E /* main.jsbundle */; };
+		F670824426BEBB3F0091856E /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = F670824326BEBB3F0091856E /* main.jsbundle */; };
+		F67082A126BEBB3F0091856E /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F67082A026BEBB3F0091856E /* assets */; };
+		F67082A526BEBB3F0091856E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F67082A426BEBB3F0091856E /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +35,6 @@
 		13B07F961A680F5B00A75B9A /* allergx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = allergx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = allergx/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = allergx/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = allergx/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = allergx/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = allergx/main.m; sourceTree = "<group>"; };
 		6D571D363A6A6A76374D953C /* Pods-allergx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allergx.debug.xcconfig"; path = "Target Support Files/Pods-allergx/Pods-allergx.debug.xcconfig"; sourceTree = "<group>"; };
@@ -45,7 +45,9 @@
 		BF4C62B83582E7FBC4D64599 /* Pods-allergx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allergx.release.xcconfig"; path = "Target Support Files/Pods-allergx/Pods-allergx.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F25EE787079FB2321BC0D93C /* libPods-allergx-allergxTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-allergx-allergxTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6F23A8D26B5FBA5008A162E /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		F670824326BEBB3F0091856E /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		F67082A026BEBB3F0091856E /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		F67082A426BEBB3F0091856E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = allergx/Images.xcassets; sourceTree = "<group>"; };
 		F6F23A9026B6035C008A162E /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		F6F23A9126B6035C008A162E /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		F6F23A9226B6035C008A162E /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -106,7 +108,6 @@
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -134,8 +135,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F67082A426BEBB3F0091856E /* Images.xcassets */,
+				F67082A026BEBB3F0091856E /* assets */,
+				F670824326BEBB3F0091856E /* main.jsbundle */,
 				F6F23A8F26B6035C008A162E /* Fonts */,
-				F6F23A8D26B5FBA5008A162E /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* allergx */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* allergxTests */,
@@ -253,7 +256,7 @@
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "allergx" */;
-			compatibilityVersion = "Xcode 12.0";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -283,9 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6F23A8E26B5FBA6008A162E /* main.jsbundle in Resources */,
+				F67082A526BEBB3F0091856E /* Images.xcassets in Resources */,
+				F67082A126BEBB3F0091856E /* assets in Resources */,
+				F670824426BEBB3F0091856E /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +497,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D571D363A6A6A76374D953C /* Pods-allergx.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YW3NW288F8;
@@ -520,7 +523,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF4C62B83582E7FBC4D64599 /* Pods-allergx.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YW3NW288F8;
@@ -674,7 +676,7 @@
 				00E356F71AD99517003FC87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "allergx" */ = {
 			isa = XCConfigurationList;
@@ -683,7 +685,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "allergx" */ = {
 			isa = XCConfigurationList;
@@ -692,7 +694,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
