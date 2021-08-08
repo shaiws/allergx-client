@@ -20,10 +20,11 @@ function Scanner({ route, navigation }) {
                 const prodJson = await product.json();
                 setPercentages(percentages + 0.25)
                 if (prodJson != -1) {
-                    let allergens = await prodJson[0]['allergens']
+                    const allergens = await prodJson[0]['allergens']
+                    const maycontain = await prodJson[0]['maycontain']
                     setPercentages(percentages + 0.25)
                     const favorite = await isFavorite(e.data);
-                    navigation.navigate("Product", { prodName: prodJson[0]['name'], prodCode: e.data, prodAllergens: allergens, prodImage: prodJson[0]['image'], favorites: favorite });
+                    navigation.navigate("Product", { prodName: prodJson[0]['name'], prodCode: e.data, prodAllergens: allergens, prodMayContain: maycontain, prodImage: prodJson[0]['image'], favorites: favorite });
                     setBarcodeRead(false);
                     setPercentages(0);
                 }
