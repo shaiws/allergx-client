@@ -59,10 +59,6 @@ function Scanner({ route, navigation }) {
                 onBarCodeRead={onBarCodeRead}
                 captureAudio={false}
             >
-                <Text
-                    style={styles.text}>
-                    {"סריקת מוצר"}
-                </Text>
             </RNCamera>
             <FAB
                 style={styles.fab}
