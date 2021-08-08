@@ -18,7 +18,7 @@ const Search = ({ navigation }) => {
         .then(response => response.json())
         .then(data => { setFilteredDataSource(data) })
         .catch(function () {
-          alert("Check your internet connection");
+          alert("אירעה שגיאה");
         });
       setSearch(text);
     } else {
@@ -46,7 +46,7 @@ const Search = ({ navigation }) => {
     // Function for click on an item
     try {
       const favorite = await isFavorite(item.id);
-      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodImage: item.image, favorites: favorite })
+      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image, favorites: favorite })
     }
     catch (error) {
       alert("Check your internet connection");

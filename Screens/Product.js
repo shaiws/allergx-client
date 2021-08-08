@@ -4,12 +4,13 @@ import MaterialCard from '../Components/MaterialCard';
 
 
 function Product({ route, navigation }) {
-    const { prodName, prodCode, prodAllergens, prodImage, favorites } = route.params;
+    const { prodName, prodCode, prodAllergens, prodMayContain, prodImage, favorites } = route.params;
     const product = {
         name: prodName,
         barcode: prodCode,
         image: prodImage,
-        allergens: prodAllergens
+        allergens: prodAllergens,
+        maycontain: prodMayContain
     }
 
     return (
@@ -18,7 +19,8 @@ function Product({ route, navigation }) {
             name={prodName}
             code={prodCode}
             favorite={favorites}
-            allergens={(prodAllergens.sort())}
+            allergens={prodAllergens.sort()}
+            maycontain={prodMayContain.sort()}
             image={prodImage}
             style={styles.materialCard}
         />

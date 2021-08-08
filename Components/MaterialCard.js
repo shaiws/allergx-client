@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import ItemView from './ItemView';
 
-formatRow = (data, numColumns) => {
-  if (data.length == 0) {
+formatRow = (data, numColumns, isAllergens) => {
+  if (data.length == 0 && isAllergens) {
     data.push("לא ידוע על אלרגנים למוצר זה. יש לבדוק על גבי האריזה");
   }
   const numberOfFullRows = Math.floor(data.length / numColumns);
@@ -16,6 +16,7 @@ formatRow = (data, numColumns) => {
 }
 
 function MaterialCard(props) {
+  let isVisable = props.maycontain.length == 0;
   return (
     <View style={[styles.container, props.style]}>
       <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
@@ -25,7 +26,7 @@ function MaterialCard(props) {
         </View>
         <Text style={styles.subtitleStyle}>{props.code}</Text>
       </View>
-      <View style={[styles.allergensContainer, { flex: 4 }]}>
+      <View style={[styles.allergensContainer, { flex: 2 }]}>
         <Text style={{
           fontSize: 18,
           color: "#000",
@@ -36,11 +37,27 @@ function MaterialCard(props) {
         <FlatList
           style={styles.list}
           numColumns={4}
-          data={formatRow(props.allergens, 4)}
+          data={formatRow(props.allergens, 3, true)}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
         />
       </View>
+      {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
+        <Text style={{
+          fontSize: 18,
+          color: "#000",
+          fontWeight: 'bold',
+          alignSelf: 'flex-start',
+          writingDirection: 'rtl',
+        }}>{"עלול להכיל:"}</Text>
+        <FlatList
+          style={styles.list}
+          numColumns={4}
+          data={formatRow(props.maycontain, 3, false)}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
+        />
+      </View>}
       <ScrollView style={styles.warning}>
         <Text style={{ writingDirection: 'rtl' }}>
           {'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש.'}
@@ -120,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   warning: {
-    flex: 1,
+    flex: 2,
     padding: 5,
     alignSelf: 'flex-end'
   },
