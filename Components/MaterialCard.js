@@ -16,7 +16,8 @@ formatRow = (data, numColumns, isAllergens) => {
 }
 
 function MaterialCard(props) {
-  let isVisable = props.maycontain.length == 0;
+  const isVisable = props.maycontain.length == 0;
+  
   return (
     <View style={[styles.container, props.style]}>
       <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
@@ -33,27 +34,28 @@ function MaterialCard(props) {
           fontWeight: 'bold',
           alignSelf: 'flex-start',
           writingDirection: 'rtl',
-        }}>{"אלרגנים:"}</Text>
+        }}>{props.allergens.length > 4 ? 'אלרגנים: (ניתן לגלול)' : 'אלרגנים:'}</Text>
         <FlatList
           style={styles.list}
           numColumns={4}
-          data={formatRow(props.allergens, 3, true)}
+          data={formatRow(props.allergens, 4, true)}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
         />
       </View>
       {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
-        <Text style={{
-          fontSize: 18,
-          color: "#000",
-          fontWeight: 'bold',
-          alignSelf: 'flex-start',
-          writingDirection: 'rtl',
-        }}>{"עלול להכיל:"}</Text>
+          <Text
+            style={{
+              fontSize: 18,
+              color: "#000",
+              fontWeight: 'bold',
+              alignSelf: 'flex-start',
+              writingDirection: 'rtl',
+            }}>{props.maycontain.length > 4 ? 'עלול להכיל: (ניתן לגלול)' : 'עלול להכיל:'}</Text>
         <FlatList
-          style={styles.list}
+          style={[styles.list]}
           numColumns={4}
-          data={formatRow(props.maycontain, 3, false)}
+          data={formatRow(props.maycontain, 4, false)}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
         />

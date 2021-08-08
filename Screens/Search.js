@@ -49,7 +49,7 @@ const Search = ({ navigation }) => {
       await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image, favorites: favorite })
     }
     catch (error) {
-      alert("Check your internet connection");
+      alert("אירעה שגיאה");
     }
   };
   const getData = async () => {
@@ -71,17 +71,19 @@ const Search = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Searchbar
 
+      <View style={styles.container}>
+
+        <Searchbar
           style={{
             borderRadius: 80, margin: 10, flexDirection: 'row', justifyContent: 'center'
           }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
-          placeholder="חיפוש..."
+          placeholder="חיפוש מוצר..."
           value={search}
         />
+
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -91,9 +93,11 @@ const Search = ({ navigation }) => {
         <FAB
           style={styles.fab}
           icon="barcode"
+          label="סריקת מוצר"
           color="black"
           onPress={() => navigation.navigate("Scanner")}
         />
+
       </View>
     </SafeAreaView>
   );

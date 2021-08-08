@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-
 import { StyleSheet, Alert, BackHandler, View } from 'react-native';
 import Search from './Screens/Search';
 import Scanner from './Screens/Scanner';
@@ -94,7 +92,7 @@ function App() {
   if (!loaded) {
     return null;
   }
-  
+
 
   if (!agreed && loaded) {
     Alert.alert(
@@ -142,8 +140,8 @@ function App() {
   else
     return (
       < BottomNavigation
-        navigationState={{ index, routes }
-        }
+        navigationState={{ index, routes }}
+        barStyle={{ marginBottom: -60 }}
         onIndexChange={setIndex}
         renderScene={({ route, jumpTo }) => {
           switch (route.key) {
@@ -154,8 +152,6 @@ function App() {
       />
     );
 }
-
-
 
 export default App;
 

@@ -45,9 +45,8 @@ function Scanner({ route, navigation }) {
                 }
             }
             catch (error) {
-                console.log(error);
                 setPercentages(0)
-                alert("Check your internet connection");
+                alert("אירעה שגיאה");
             }
         }
     }
@@ -67,6 +66,7 @@ function Scanner({ route, navigation }) {
             <FAB
                 style={styles.fab}
                 icon="arrow-left"
+                label="חזור"
                 color="black"
                 onPress={() => navigation.goBack(null)}
             />

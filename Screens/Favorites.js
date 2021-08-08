@@ -30,7 +30,7 @@ function Favorites({ route, navigation }) {
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [loaded, setLoaded] = useState(false);
     if (!loaded) {
-        console.log("Loading");
+        
         getData().then((data) => { data != null ? setFilteredDataSource((Array(data))) : [] });
         setLoaded(true);
     }
@@ -42,7 +42,6 @@ function Favorites({ route, navigation }) {
             // clear error
         }
 
-        console.log('Done.')
     }
 
     return (
