@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Alert, Pressable, ActivityIndicator } from 'react-native';
+import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
@@ -119,7 +119,6 @@ const Search = ({ navigation }) => {
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
               setModalVisible(!modalVisible);
             }}
           >
@@ -194,14 +193,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     // alignItems: "center",
-    marginTop: 22
+    //marginTop: 22
   },
   modalView: {
     flex: 1,
-    margin: 50,
+    margin: 35,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 100,
+    padding: 80,
     // alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -221,9 +220,6 @@ const styles = StyleSheet.create({
   },
   buttonOpen: {
     backgroundColor: "white",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "black",
