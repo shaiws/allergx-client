@@ -4,8 +4,6 @@ import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
 
-import { ProgressBar, Colors } from 'react-native-paper';
-
 function Scanner({ route, navigation }) {
     const [isBarcodeRead, setBarcodeRead] = useState(false);
     const [percentages, setPercentages] = useState(0)
@@ -53,7 +51,9 @@ function Scanner({ route, navigation }) {
     }
     return (
         <View style={styles.container}>
-            <ProgressBar progress={percentages} color={Colors.green} />
+            <View style={styles.header} >
+                <Text>יש לסרוק את הברקוד המופיע על גבי המוצר</Text>
+            </View>
             <RNCamera
                 style={styles.preview}
                 onBarCodeRead={onBarCodeRead}
@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-
     },
     preview: {
         flex: 3,
@@ -108,5 +107,12 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         backgroundColor: 'white'
+    }, header: {
+        height: 80,
+        width: '100%',
+        backgroundColor: 'lightblue',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
     },
 });

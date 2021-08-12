@@ -341,7 +341,7 @@ function ItemView(props) {
 }
 const styles = StyleSheet.create({
     item: {
-        backgroundColor: '#6495ED',
+        backgroundColor: 'lightblue',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,

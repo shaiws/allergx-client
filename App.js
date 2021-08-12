@@ -4,7 +4,7 @@ import Search from './Screens/Search';
 import Scanner from './Screens/Scanner';
 import Product from './Screens/Product';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { BottomNavigation } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RNRestart from 'react-native-restart';
@@ -30,7 +30,9 @@ function AppStackScreen(props) {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
-        headerShown: false
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+
       }}
         initialRouteName={props.initialRouteName}>
         <Stack.Screen
@@ -38,7 +40,7 @@ function AppStackScreen(props) {
           options={{
             title: 'חיפוש', icon: "search-database",
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: 'lightblue',
             },
           }}
           component={Search}
@@ -48,7 +50,7 @@ function AppStackScreen(props) {
           options={{
             title: 'Scanner',
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: 'lightblue',
             },
           }}
           component={Scanner}
@@ -58,7 +60,7 @@ function AppStackScreen(props) {
           options={{
             title: 'Product',
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: 'lightblue',
             },
           }}
           component={Product}
@@ -86,7 +88,7 @@ function App() {
 
 
   const routes = [
-    { key: 'Search', title: 'חיפוש', icon: 'database-search', color: '#3F51B5' },
+    { key: 'Search', title: 'חיפוש', icon: 'database-search', color: 'lightblue' },
   ];
 
   if (!loaded) {

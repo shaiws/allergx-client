@@ -23,7 +23,6 @@ function MaterialCardWithImageAndTitle(props) {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 2,
-    borderColor: '#CCC',
     flexWrap: 'nowrap',
     backgroundColor: '#FFF',
   },
@@ -39,26 +38,25 @@ const styles = StyleSheet.create({
     writingDirection: 'rtl',
     fontSize: 24,
     flex: 1,
-    color: '#000',
+    color: 'black',
     paddingBottom: 12,
     alignSelf: 'flex-start',
   },
   subtitleStyle: {
     fontSize: 14,
     flex: 1,
-    color: '#000',
+    color: 'gray',
     lineHeight: 16,
-    opacity: 0.5,
     alignSelf: 'flex-start',
     writingDirection: 'rtl',
 
   },
   cardItemImagePlace: {
-    backgroundColor: '#ccc',
-    height: 80,
-    width: 80,
+    padding: '10%',
     margin: 16,
-    borderRadius: 20,
+    resizeMode: 'contain',
+
+    //borderRadius: 20,
   },
 });
 

@@ -17,7 +17,7 @@ formatRow = (data, numColumns, isAllergens) => {
 
 function MaterialCard(props) {
   const isVisable = props.maycontain.length == 0;
-  
+
   return (
     <View style={[styles.container, props.style]}>
       <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
@@ -44,14 +44,14 @@ function MaterialCard(props) {
         />
       </View>
       {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
-          <Text
-            style={{
-              fontSize: 18,
-              color: "#000",
-              fontWeight: 'bold',
-              alignSelf: 'flex-start',
-              writingDirection: 'rtl',
-            }}>{props.maycontain.length > 4 ? 'עלול להכיל: (ניתן לגלול)' : 'עלול להכיל:'}</Text>
+        <Text
+          style={{
+            fontSize: 18,
+            color: "#000",
+            fontWeight: 'bold',
+            alignSelf: 'flex-start',
+            writingDirection: 'rtl',
+          }}>{props.maycontain.length > 4 ? 'עלול להכיל: (ניתן לגלול)' : 'עלול להכיל:'}</Text>
         <FlatList
           style={[styles.list]}
           numColumns={4}
@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 20,
-    borderColor: '#abcdef',
+    borderColor: 'lightblue',
     flexWrap: 'nowrap',
-    backgroundColor: '#FFF',
-    shadowColor: '#abcdef',
+    backgroundColor: 'white',
+    shadowColor: 'lightblue',
     shadowOffset: {
       width: -2,
       height: 2,
@@ -88,11 +88,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   cardItemImagePlace: {
-    backgroundColor: '#ccc',
-    width: null,
-    height: null,
+    backgroundColor: 'white',
+    padding: '5%',
     resizeMode: 'contain',
-    flex: 2,
+    flex: 1,
   },
   bodyContent: {
     flex: 1,
@@ -104,11 +103,10 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     flex: 10,
-
     alignSelf: 'flex-start',
     writingDirection: 'rtl',
     fontSize: 20,
-    color: '#000',
+    color: 'black',
   },
   subtitleStyle: {
     fontSize: 14,
@@ -141,7 +139,10 @@ const styles = StyleSheet.create({
   warning: {
     flex: 2,
     padding: 5,
-    alignSelf: 'flex-end'
+    height: 80,
+    width: '100%',
+    alignSelf: 'flex-end',
+
   },
 
 });
