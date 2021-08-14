@@ -130,7 +130,7 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Pressable onPress={setModalVisible(false)}>
+                <Pressable onPress={() => setModalVisible(false)}>
                   <Text>X</Text>
                 </Pressable>
                 <CheckboxList
