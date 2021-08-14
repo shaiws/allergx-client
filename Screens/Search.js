@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -11,43 +11,46 @@ import CheckboxList from 'rn-checkbox-list';
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [backupList, setBackupList] = useState([]);
   const [allergensList, setAllergensList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
-  useEffect(() => {
-    fetch(`https://allergens-api.herokuapp.com/getAllAllergens`)
-      .then(response => response.json())
-      .then(data => { getAllergenesList(data) })
-      .catch(function (e) {
-        console.log(e);
-
-        alert("אירעה שגיאה");
-      });
-  })
   const searchFilterFunction = async (text) => {
     // Check if searched text is not blank
     if (text && text.length >= 3) {
       // Update FilteredDataSource
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
-        .then(data => { setFilteredDataSource(data) })
+        .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
         .catch(function () {
           alert("אירעה שגיאה");
         });
-      setSearch(text);
     } else {
       // Inserted text is blank
       // Update FilteredDataSource with empty
+      getAllergenesList([])
       setFilteredDataSource([]);
-      setSearch(text);
     }
+    setSearch(text);
   };
   const getAllergenesList = async (data) => {
     let tempList = [];
+    let counter = 0;
     for (let i = 0; i < data.length; i++) {
-      tempList.push({ "id": i + 1, "name": data[i] });
+      if (data[i].allergens.length > 0)
+        for (let j = 0; j < data[i].allergens.length; j++)
+          if (!tempList.find(obj => obj.name === data[i].allergens[j])) {
+            tempList.push({ "id": counter, "name": data[i].allergens[j] });
+            counter++;
+          }
+      if (data[i].maycontain.length > 0)
+        for (let j = 0; j < data[i].maycontain.length; j++)
+          if (!tempList.find(obj => obj.name === data[i].maycontain[j])) {
+            tempList.push({ "id": counter, "name": data[i].maycontain[j] });
+            counter++;
+          }
     }
-    console.log(tempList.sort((a, b) => a.name.localeCompare(b.name)));
+
     setAllergensList(tempList.sort((a, b) => a.name.localeCompare(b.name)));
   }
   const ItemView = ({ item }) => {
@@ -106,7 +109,12 @@ const Search = ({ navigation }) => {
           />
           <Pressable
             style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
+            onPress={() => {
+              if (allergensList.length > 0)
+                setModalVisible(true)
+              else
+                alert("ראשית יש לבצע חיפוש")
+            }}
           >
             <Text style={styles.textStyle}>סינון</Text>
           </Pressable>
@@ -126,9 +134,32 @@ const Search = ({ navigation }) => {
                   headerName="סינון"
                   theme="red"
                   listItems={allergensList}
-                  onChange={({ ids, items }) => console.log('My updated list :: ', ids)}
+                  onChange={({ name, items }) => {
+                    let toRemove = [];
+                    for (let index = 0; index < items.length; index++) {
+                      filteredDataSource.find(obj => {
+                        obj.allergens.find(allergen => {
+                          if (allergen == items[index].name) {
+                            toRemove.push(obj);
+                          }
+                        })
+                        obj.maycontain.find(allergen => {
+                          if (allergen == items[index].name) {
+                            toRemove.push(obj);
+                          }
+                        })
+                      })
+                    }
+                    tempList = filteredDataSource
+                    console.log(tempList.length);
+                    for (let index = 0; index < toRemove.length; index++) {
+                      tempList.splice(tempList.indexOf(toRemove[index]), 1);
+                      console.log(tempList.length);
+                    }
+                    setFilteredDataSource(tempList);
+                  }}
                   listItemStyle={{ borderBottomColor: '#eee', borderBottomWidth: 1 }}
-                  checkboxProp={{ boxType: 'square' }} // iOS (supported from v0.3.0)
+                  checkboxProp={{ boxType: 'square' }}
                   onLoading={() => <ActivityIndicator />}
                 />
               </View>
