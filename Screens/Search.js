@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,13 +14,23 @@ const Search = ({ navigation }) => {
   const [allergensList, setAllergensList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
+  useEffect(() => {
+    fetch(`https://allergens-api.herokuapp.com/getAllAllergens`)
+      .then(response => response.json())
+      .then(data => { getAllergenesList(data) })
+      .catch(function (e) {
+        console.log(e);
+
+        alert("אירעה שגיאה");
+      });
+  })
   const searchFilterFunction = async (text) => {
     // Check if searched text is not blank
     if (text && text.length >= 3) {
       // Update FilteredDataSource
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
-        .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
+        .then(data => { setFilteredDataSource(data) })
         .catch(function () {
           alert("אירעה שגיאה");
         });
@@ -34,20 +44,8 @@ const Search = ({ navigation }) => {
   };
   const getAllergenesList = async (data) => {
     let tempList = [];
-    let counter = 0;
     for (let i = 0; i < data.length; i++) {
-      if (data[i].allergens.length > 0)
-        for (let j = 0; j < data[i].allergens.length; j++)
-          if (!tempList.find(obj => obj.name === data[i].allergens[j])) {
-            tempList.push({ "id": counter, "name": data[i].allergens[j] });
-            counter++;
-          }
-      if (data[i].maycontain.length > 0)
-        for (let j = 0; j < data[i].maycontain.length; j++)
-          if (!tempList.find(obj => obj.name === data[i].maycontain[j])) {
-            tempList.push({ "id": counter, "name": data[i].maycontain[j] });
-            counter++;
-          }
+      tempList.push({ "id": i + 1, "name": data[i] });
     }
     console.log(tempList.sort((a, b) => a.name.localeCompare(b.name)));
     setAllergensList(tempList.sort((a, b) => a.name.localeCompare(b.name)));
