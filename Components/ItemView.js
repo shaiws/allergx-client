@@ -318,6 +318,11 @@ function ItemView(props) {
             color = "red"
             image = require("../assets/seeds.png");
             break;
+
+        case 'תירס':
+            color = "red"
+            image = require("../assets/corn.png");
+            break;
         default:
             return (
                 <Text style={styles.bodyText}>

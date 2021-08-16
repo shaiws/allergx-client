@@ -4,6 +4,11 @@ import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import { FAB } from 'react-native-paper';
+import {
+
+  BarIndicator
+
+} from 'react-native-indicators';
 
 
 
@@ -117,6 +122,7 @@ const Search = ({ navigation }) => {
             placeholder="חיפוש מוצר..."
             value={search}
           />
+
           <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => {
@@ -140,6 +146,7 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
+                <Text>בקרוב...</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(false)}>
@@ -164,8 +171,7 @@ const Search = ({ navigation }) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-              <Text>טוען...</Text>
-              <ActivityIndicator animating={true} size="large" color="#000000" />
+              <BarIndicator animating={true} count={5} size={30} />
             </View>
         }
 

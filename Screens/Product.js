@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MaterialCard from '../Components/MaterialCard';
 
 
@@ -14,16 +14,18 @@ function Product({ route, navigation }) {
     }
 
     return (
-        <MaterialCard
-            nav={navigation}
-            name={prodName}
-            code={prodCode}
-            favorite={favorites}
-            allergens={prodAllergens.sort()}
-            maycontain={prodMayContain.sort()}
-            image={prodImage}
-            style={styles.materialCard}
-        />
+        <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
+            <MaterialCard
+                nav={navigation}
+                name={prodName}
+                code={prodCode}
+                favorite={favorites}
+                allergens={prodAllergens.sort()}
+                maycontain={prodMayContain.sort()}
+                image={prodImage}
+                style={styles.materialCard}
+            />
+        </View>
     )
 }
 

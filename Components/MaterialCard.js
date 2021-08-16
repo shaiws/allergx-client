@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   cardItemImagePlace: {
     backgroundColor: 'white',
     padding: '5%',
+    margin: 5,
     resizeMode: 'contain',
     flex: 1,
   },
@@ -99,7 +100,6 @@ const styles = StyleSheet.create({
     maxHeight: 70,
     paddingTop: -16,
     paddingBottom: -16,
-
   },
   titleStyle: {
     flex: 10,
@@ -111,21 +111,8 @@ const styles = StyleSheet.create({
   subtitleStyle: {
     fontSize: 14,
     opacity: 0.5,
-
     alignSelf: 'flex-start',
     writingDirection: 'rtl',
-    flex: 1
-  },
-  actionButton: {
-    padding: 5,
-    height: 36,
-    flex: 1
-  },
-
-  iconStyle: {
-    fontSize: 24,
-    color: '#000',
-    opacity: 0.7,
     flex: 1
   },
   allergensContainer: {
@@ -134,17 +121,17 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   list: {
-    flex: 1
+    flex: 3
   },
   warning: {
     flex: 2,
     padding: 5,
+    margin: 5,
     height: 80,
     width: '100%',
     alignSelf: 'flex-end',
-
-  },
-
+    bottom: 0
+  }
 });
 
 export default MaterialCard;
