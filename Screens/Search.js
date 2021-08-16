@@ -1,38 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import { FAB } from 'react-native-paper';
-import CheckboxList from 'rn-checkbox-list';
+
 
 
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [backupList, setBackupList] = useState([]);
   const [allergensList, setAllergensList] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   const searchFilterFunction = async (text) => {
-    // Check if searched text is not blank
-    if (text && text.length >= 3) {
-      // Update FilteredDataSource
+    setLoading(true);
+    if (text.length > 0)
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
         .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
         .catch(function () {
           alert("אירעה שגיאה");
         });
-    } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with empty
-      getAllergenesList([])
-      setFilteredDataSource([]);
-    }
+    else
+      getAllProducts();
     setSearch(text);
   };
+
+  const getAllProducts = async () => {
+    fetch(`https://allergens-api.herokuapp.com/getAllProducts`)
+      .then(response => response.json())
+      .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
+      .catch(function () {
+        alert("אירעה שגיאה");
+      });
+    setLoading(true);
+  }
+
   const getAllergenesList = async (data) => {
     let tempList = [];
     let counter = 0;
@@ -52,6 +62,7 @@ const Search = ({ navigation }) => {
     }
 
     setAllergensList(tempList.sort((a, b) => a.name.localeCompare(b.name)));
+    setLoading(false);
   }
   const ItemView = ({ item }) => {
     return (
@@ -92,10 +103,9 @@ const Search = ({ navigation }) => {
     }
     return false;
   }
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" hidden={true} backgroundColor="lightblue" />
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="lightblue" />
       <View style={styles.container}>
         <View style={styles.header}>
           <Searchbar
@@ -130,52 +140,28 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Pressable onPress={() => setModalVisible(false)}>
-                  <Text>X</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(false)}>
+                  <Text style={styles.textStyle}>אישור</Text>
                 </Pressable>
-                <CheckboxList
-                  headerName="סינון"
-                  theme="red"
-                  listItems={allergensList}
-                  onChange={({ name, items }) => {
-                    let toRemove = [];
-                    for (let index = 0; index < items.length; index++) {
-                      filteredDataSource.find(obj => {
-                        obj.allergens.find(allergen => {
-                          if (allergen == items[index].name) {
-                            toRemove.push(obj);
-                          }
-                        })
-                        obj.maycontain.find(allergen => {
-                          if (allergen == items[index].name) {
-                            toRemove.push(obj);
-                          }
-                        })
-                      })
-                    }
-                    tempList = filteredDataSource
-                    console.log(tempList.length);
-                    for (let index = 0; index < toRemove.length; index++) {
-                      tempList.splice(tempList.indexOf(toRemove[index]), 1);
-                      console.log(tempList.length);
-                    }
-                    setFilteredDataSource(tempList);
-                  }}
-                  listItemStyle={{ borderBottomColor: '#eee', borderBottomWidth: 1 }}
-                  checkboxProp={{ boxType: 'square' }}
-                  onLoading={() => <ActivityIndicator />}
-                />
               </View>
             </View>
           </Modal>
 
         </View>
-        <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
-          renderItem={ItemView}
-        />
+        {
+          !loading ? <FlatList
+            data={filteredDataSource}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
+            renderItem={ItemView}
+          /> :
+            <View style={[styles.centeredView, { alignItems: "center" }]}>
+              <Text>טוען...</Text>
+              <ActivityIndicator animating={true} size="large" color="#000000" />
+            </View>
+        }
 
         <FAB
           style={styles.fab}
@@ -205,7 +191,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-    borderRadius: 10
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5
   },
   itemStyle: {
     flex: 1,
@@ -224,16 +211,12 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    // alignItems: "center",
-    //marginTop: 22
   },
   modalView: {
     flex: 1,
-    margin: 35,
+    margin: 10,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 80,
-    // alignItems: "center",
+    borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -252,6 +235,14 @@ const styles = StyleSheet.create({
   },
   buttonOpen: {
     backgroundColor: "white",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    margin: 5
+
   },
   textStyle: {
     color: "black",
