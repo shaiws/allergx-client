@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import { FAB } from 'react-native-paper';
-import {
-
-  BarIndicator
-
-} from 'react-native-indicators';
-
-
+import { BarIndicator } from 'react-native-indicators';
+import SelectMultiple from 'react-native-select-multiple'
 
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [allergensList, setAllergensList] = useState([]);
+  const [selectedFiltes, setSelectedFiltes] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +24,7 @@ const Search = ({ navigation }) => {
     if (text.length > 0)
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
-        .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
+        .then(data => { setSearchResults(data); getAllergenesList(data) })
         .catch(function () {
           alert("אירעה שגיאה");
         });
@@ -41,7 +36,7 @@ const Search = ({ navigation }) => {
   const getAllProducts = async () => {
     fetch(`https://allergens-api.herokuapp.com/getAllProducts`)
       .then(response => response.json())
-      .then(data => { setFilteredDataSource(data); getAllergenesList(data) })
+      .then(data => { setSearchResults(data); getAllergenesList(data) })
       .catch(function () {
         alert("אירעה שגיאה");
       });
@@ -76,14 +71,12 @@ const Search = ({ navigation }) => {
           style={styles.materialCardWithImageAndTitle}
           image={item.image}
           prodName={item.name}
-          // prodAllergens={item.allergens}
           prodCode={item.barcode} />
       </TouchableOpacity>
     );
   };
 
   const getItem = async (item) => {
-    // Function for click on an item
     try {
       const favorite = await isFavorite(item.id);
       await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image, favorites: favorite })
@@ -92,21 +85,9 @@ const Search = ({ navigation }) => {
       alert("אירעה שגיאה");
     }
   };
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('@favorites')
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-      // error reading value
-    }
-  }
-  const isFavorite = async (barcode) => {
-    const storage = await getData();
-    if (storage) {
-      const toReturn = storage[barcode] != undefined;
-      return toReturn;
-    }
-    return false;
+
+  const onSelectionsChange = async () => {
+    console.log(selectedFiltes);
   }
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -129,7 +110,7 @@ const Search = ({ navigation }) => {
               if (allergensList.length > 0)
                 setModalVisible(true)
               else
-                alert("ראשית יש לבצע חיפוש")
+                alert("אירעה שגיאה!")
             }}
           >
             <Text style={styles.textStyle}>סינון</Text>
@@ -146,7 +127,10 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text>בקרוב...</Text>
+                <SelectMultiple
+                  items={allergensList}
+                  selectedItems={selectedFiltes}
+                  onSelectionsChange={(onSelectionsChange)} />
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(false)}>
@@ -159,7 +143,7 @@ const Search = ({ navigation }) => {
         </View>
         {
           !loading ? <FlatList
-            data={filteredDataSource}
+            data={searchResults}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
             renderItem={ItemView}

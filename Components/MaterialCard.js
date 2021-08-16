@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
-import ItemView from './ItemView';
+import AllergensView from './AllergensView';
 
 formatRow = (data, numColumns, isAllergens) => {
   if (data.length == 0 && isAllergens) {
@@ -40,7 +40,7 @@ function MaterialCard(props) {
           numColumns={4}
           data={formatRow(props.allergens, 4, true)}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
+          renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
         />
       </View>
       {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
