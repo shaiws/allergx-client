@@ -157,7 +157,13 @@ const Search = ({ navigation }) => {
             ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
             renderItem={ItemView}
           /> :
-            <View style={[styles.centeredView, { alignItems: "center" }]}>
+            <View style={{
+              position: 'absolute',
+              top: 0, left: 0,
+              right: 0, bottom: 0,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
               <Text>טוען...</Text>
               <ActivityIndicator animating={true} size="large" color="#000000" />
             </View>
