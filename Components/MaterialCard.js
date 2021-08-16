@@ -124,12 +124,12 @@ const styles = StyleSheet.create({
     flex: 3
   },
   warning: {
-    flex: 2,
-    padding: 5,
+    flex: 1,
+    padding: 0,
     margin: 5,
     height: 80,
     width: '100%',
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-start',
     bottom: 0
   }
 });

@@ -141,17 +141,7 @@ function App() {
   }
   else
     return (
-      < BottomNavigation
-        navigationState={{ index, routes }}
-        barStyle={{ marginBottom: -60 }}
-        onIndexChange={setIndex}
-        renderScene={({ route, jumpTo }) => {
-          switch (route.key) {
-            case 'Search':
-              return <AppStackScreen initialRouteName="Search" jumpTo={jumpTo} />;
-          }
-        }}
-      />
+      <AppStackScreen initialRouteName="Search" jumpTo={Search} />
     );
 }
 
