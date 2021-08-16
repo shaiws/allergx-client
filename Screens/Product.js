@@ -4,7 +4,7 @@ import MaterialCard from '../Components/MaterialCard';
 
 
 function Product({ route, navigation }) {
-    const { prodName, prodCode, prodAllergens, prodMayContain, prodImage, favorites } = route.params;
+    const { prodName, prodCode, prodAllergens, prodMayContain, prodImage } = route.params;
     const product = {
         name: prodName,
         barcode: prodCode,
@@ -19,7 +19,6 @@ function Product({ route, navigation }) {
                 nav={navigation}
                 name={prodName}
                 code={prodCode}
-                favorite={favorites}
                 allergens={prodAllergens.sort()}
                 maycontain={prodMayContain.sort()}
                 image={prodImage}

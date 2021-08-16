@@ -21,8 +21,7 @@ function Scanner({ route, navigation }) {
                     const allergens = await prodJson[0]['allergens']
                     const maycontain = await prodJson[0]['maycontain']
                     setPercentages(percentages + 0.25)
-                    const favorite = await isFavorite(e.data);
-                    navigation.navigate("Product", { prodName: prodJson[0]['name'], prodCode: e.data, prodAllergens: allergens, prodMayContain: maycontain, prodImage: prodJson[0]['image'], favorites: favorite });
+                    navigation.navigate("Product", { prodName: prodJson[0]['name'], prodCode: e.data, prodAllergens: allergens, prodMayContain: maycontain, prodImage: prodJson[0]['image'] });
                     setBarcodeRead(false);
                     setPercentages(0);
                 }
@@ -71,23 +70,8 @@ function Scanner({ route, navigation }) {
     );
 
 }
-const getData = async () => {
-    try {
-        const jsonValue = await AsyncStorage.getItem('@favorites')
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-        console.log(e);
-        // error reading value
-    }
-}
-const isFavorite = async (barcode) => {
-    const storage = await getData();
-    if (storage) {
-        const toReturn = storage[barcode] != undefined;
-        return toReturn;
-    }
-    return false;
-}
+
+
 export default Scanner
 const styles = StyleSheet.create({
     container: {

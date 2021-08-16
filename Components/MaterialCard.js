@@ -57,7 +57,7 @@ function MaterialCard(props) {
           numColumns={4}
           data={formatRow(props.maycontain, 4, false)}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => <ItemView prod={item} key={index.toString()} />}
+          renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
         />
       </View>}
       <ScrollView style={styles.warning}>

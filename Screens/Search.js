@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
-import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import { FAB } from 'react-native-paper';
 import { BarIndicator } from 'react-native-indicators';
-import SelectMultiple from 'react-native-select-multiple'
 
+import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
+import CheckBoxList from '../Components/CheckBoxList'
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -25,7 +25,8 @@ const Search = ({ navigation }) => {
       fetch(`https://allergens-api.herokuapp.com/item?name=${text}`)
         .then(response => response.json())
         .then(data => { setSearchResults(data); getAllergenesList(data) })
-        .catch(function () {
+        .catch(function (e) {
+          console.log(e);
           alert("אירעה שגיאה");
         });
     else
@@ -37,7 +38,8 @@ const Search = ({ navigation }) => {
     fetch(`https://allergens-api.herokuapp.com/getAllProducts`)
       .then(response => response.json())
       .then(data => { setSearchResults(data); getAllergenesList(data) })
-      .catch(function () {
+      .catch(function (e) {
+        console.log(e);
         alert("אירעה שגיאה");
       });
     setLoading(true);
@@ -78,17 +80,14 @@ const Search = ({ navigation }) => {
 
   const getItem = async (item) => {
     try {
-      const favorite = await isFavorite(item.id);
-      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image, favorites: favorite })
+      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image })
     }
     catch (error) {
+      console.log(error);
       alert("אירעה שגיאה");
     }
   };
 
-  const onSelectionsChange = async () => {
-    console.log(selectedFiltes);
-  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" hidden={false} backgroundColor="lightblue" />
@@ -127,10 +126,7 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <SelectMultiple
-                  items={allergensList}
-                  selectedItems={selectedFiltes}
-                  onSelectionsChange={(onSelectionsChange)} />
+                <CheckBoxList list={allergensList} />
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(false)}>
