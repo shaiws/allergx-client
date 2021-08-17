@@ -80,7 +80,8 @@ const Search = ({ navigation }) => {
 
   const getItem = async (item) => {
     try {
-      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: item.allergens, prodMayContain: item.maycontain, prodImage: item.image })
+      let allInfo = [...item.allergens, ...item.additional_info];
+      await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: allInfo, prodMayContain: item.maycontain, prodImage: item.image })
     }
     catch (error) {
       console.log(error);

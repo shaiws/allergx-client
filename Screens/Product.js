@@ -10,7 +10,7 @@ function Product({ route, navigation }) {
         barcode: prodCode,
         image: prodImage,
         allergens: prodAllergens,
-        maycontain: prodMayContain
+        maycontain: prodMayContain,
     }
 
     return (
