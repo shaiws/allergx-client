@@ -3,7 +3,6 @@ import { FlatList, Divider, View, Text } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 function CheckBoxList(props) {
   const [checked, setChecked] = useState(false);
-  console.log(props);
   return (
     <FlatList
       data={props.list}

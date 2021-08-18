@@ -34,7 +34,7 @@ function MaterialCard(props) {
           fontWeight: 'bold',
           alignSelf: 'flex-start',
           writingDirection: 'rtl',
-        }}>{props.allergens.length > 4 ? 'אלרגנים: (ניתן לגלול)' : 'אלרגנים:'}</Text>
+        }}>{`אלרגנים: (${props.allergens.length})`}</Text>
         <FlatList
           style={styles.list}
           numColumns={4}
@@ -51,7 +51,7 @@ function MaterialCard(props) {
             fontWeight: 'bold',
             alignSelf: 'flex-start',
             writingDirection: 'rtl',
-          }}>{props.maycontain.length > 4 ? 'עלול להכיל: (ניתן לגלול)' : 'עלול להכיל:'}</Text>
+          }}>{`עלול להכיל: (${props.maycontain.length})`}</Text>
         <FlatList
           style={[styles.list]}
           numColumns={4}

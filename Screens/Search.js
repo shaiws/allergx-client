@@ -26,7 +26,6 @@ const Search = ({ navigation }) => {
         .then(response => response.json())
         .then(data => { setSearchResults(data); getAllergenesList(data) })
         .catch(function (e) {
-          console.log(e);
           alert("אירעה שגיאה");
         });
     else
@@ -39,7 +38,6 @@ const Search = ({ navigation }) => {
       .then(response => response.json())
       .then(data => { setSearchResults(data); getAllergenesList(data) })
       .catch(function (e) {
-        console.log(e);
         alert("אירעה שגיאה");
       });
     setLoading(true);
@@ -84,7 +82,6 @@ const Search = ({ navigation }) => {
       await navigation.navigate("Product", { prodName: item.name, prodCode: item.barcode, prodAllergens: allInfo, prodMayContain: item.maycontain, prodImage: item.image })
     }
     catch (error) {
-      console.log(error);
       alert("אירעה שגיאה");
     }
   };
@@ -110,7 +107,7 @@ const Search = ({ navigation }) => {
               if (allergensList.length > 0)
                 setModalVisible(true)
               else
-                alert("אירעה שגיאה!")
+                alert("לא קיימים אלרגנים בחיפש זה")
             }}
           >
             <Text style={styles.textStyle}>סינון</Text>
@@ -127,7 +124,8 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <CheckBoxList list={allergensList} />
+                {/* <CheckBoxList list={allergensList} /> */}
+                <Text>בקרוב...</Text>
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(false)}>
