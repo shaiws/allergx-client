@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Alert, BackHandler, View } from 'react-native';
+import { StyleSheet, Alert, BackHandler, View, StatusBar } from 'react-native';
 import Search from './Screens/Search';
 import Scanner from './Screens/Scanner';
 import Product from './Screens/Product';
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import { BottomNavigation } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RNRestart from 'react-native-restart';
 
@@ -28,7 +27,9 @@ const getData = async () => {
 function AppStackScreen(props) {
 
   return (
+
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="lightblue" />
       <Stack.Navigator screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS

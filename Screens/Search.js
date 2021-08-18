@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, StatusBar, FlatList, Modal, Pressable, ActivityIndicator } from 'react-native';
+import { SafeAreaView, TouchableOpacity, StyleSheet, View, Text, FlatList, Modal, Pressable } from 'react-native';
 import { Divider, Searchbar } from 'react-native-paper';
 import { FAB } from 'react-native-paper';
 import { BarIndicator } from 'react-native-indicators';
-
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
 import CheckBoxList from '../Components/CheckBoxList'
 
@@ -88,7 +87,6 @@ const Search = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="lightblue" />
       <View style={styles.container}>
         <View style={styles.header}>
           <Searchbar
@@ -196,7 +194,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     margin: 16,
     right: 0,
-    bottom:20,
+    bottom: 20,
     backgroundColor: 'white'
   },
   centeredView: {
