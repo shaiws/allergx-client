@@ -86,7 +86,7 @@ const Search = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "lightblue" }}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Searchbar

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
+import { StyleSheet, View, Image, Text, SafeAreaView, FlatList, ScrollView } from "react-native";
 import AllergensView from './AllergensView';
 
 formatRow = (data, numColumns, isAllergens) => {
@@ -9,7 +9,7 @@ formatRow = (data, numColumns, isAllergens) => {
   const numberOfFullRows = Math.floor(data.length / numColumns);
   let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
   while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
-    data.push(null);
+    //data.push(null);
     numberOfElementsLastRow++;
   }
   return data;
@@ -19,53 +19,56 @@ function MaterialCard(props) {
   const isVisable = props.maycontain.length == 0;
 
   return (
-    <View style={[styles.container, props.style]}>
-      <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
-      <View style={styles.bodyContent}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.titleStyle}>{props.name}</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "lightblue" }}>
+
+      <View style={[styles.container, props.style]}>
+        <Image source={{ uri: props.image }} style={styles.cardItemImagePlace} />
+        <View style={styles.bodyContent}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.titleStyle}>{props.name}</Text>
+          </View>
+          <Text style={styles.subtitleStyle}>{props.code}</Text>
         </View>
-        <Text style={styles.subtitleStyle}>{props.code}</Text>
-      </View>
-      <View style={[styles.allergensContainer, { flex: 2 }]}>
-        <Text style={{
-          fontSize: 18,
-          color: "#000",
-          fontWeight: 'bold',
-          alignSelf: 'flex-start',
-          writingDirection: 'rtl',
-        }}>{`אלרגנים: (${props.allergens.length})`}</Text>
-        <FlatList
-          style={styles.list}
-          numColumns={4}
-          data={formatRow(props.allergens, 4, true)}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
-        />
-      </View>
-      {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
-        <Text
-          style={{
+        <View style={[styles.allergensContainer, { flex: 2 }]}>
+          <Text style={{
             fontSize: 18,
             color: "#000",
             fontWeight: 'bold',
             alignSelf: 'flex-start',
             writingDirection: 'rtl',
-          }}>{`עלול להכיל: (${props.maycontain.length})`}</Text>
-        <FlatList
-          style={[styles.list]}
-          numColumns={4}
-          data={formatRow(props.maycontain, 4, false)}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
-        />
-      </View>}
-      <ScrollView style={styles.warning}>
-        <Text style={{ writingDirection: 'rtl' }}>
-          {'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש.'}
-        </Text>
-      </ScrollView>
-    </View >
+          }}>{`אלרגנים: (${props.allergens.length})`}</Text>
+          <FlatList
+            style={styles.list}
+            numColumns={4}
+            data={formatRow(props.allergens, 4, true)}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
+          />
+        </View>
+        {!isVisable && <View style={[styles.allergensContainer, { flex: 2 }]}>
+          <Text
+            style={{
+              fontSize: 18,
+              color: "#000",
+              fontWeight: 'bold',
+              alignSelf: 'flex-start',
+              writingDirection: 'rtl',
+            }}>{`עלול להכיל: (${props.maycontain.length})`}</Text>
+          <FlatList
+            style={[styles.list]}
+            numColumns={4}
+            data={formatRow(props.maycontain, 4, false)}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => <AllergensView prod={item} key={index.toString()} />}
+          />
+        </View>}
+        <ScrollView style={styles.warning}>
+          <Text style={{ writingDirection: 'rtl' }}>
+            {'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש.'}
+          </Text>
+        </ScrollView>
+      </View >
+    </SafeAreaView>
   );
 }
 

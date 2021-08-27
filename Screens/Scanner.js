@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert } from 'react-native';
+import { Text, View, StyleSheet, Alert, SafeAreaView } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB } from 'react-native-paper';
@@ -49,24 +49,27 @@ function Scanner({ route, navigation }) {
         }
     }
     return (
-        <View style={styles.container}>
-            <View style={styles.header} >
-                <Text>יש לסרוק את הברקוד המופיע על גבי המוצר</Text>
-            </View>
-            <RNCamera
-                style={styles.preview}
-                onBarCodeRead={onBarCodeRead}
-                captureAudio={false}
-            >
-            </RNCamera>
-            <FAB
-                style={styles.fab}
-                icon="arrow-left"
-                label="חזור"
-                color="black"
-                onPress={() => navigation.goBack(null)}
-            />
-        </View >
+        <SafeAreaView style={{ flex: 1, backgroundColor: "lightblue" }}>
+
+            <View style={styles.container}>
+                <View style={styles.header} >
+                    <Text>יש לסרוק את הברקוד המופיע על גבי המוצר</Text>
+                </View>
+                <RNCamera
+                    style={styles.preview}
+                    onBarCodeRead={onBarCodeRead}
+                    captureAudio={false}
+                >
+                </RNCamera>
+                <FAB
+                    style={styles.fab}
+                    icon="arrow-left"
+                    label="חזור"
+                    color="black"
+                    onPress={() => navigation.goBack(null)}
+                />
+            </View >
+        </SafeAreaView>
     );
 
 }

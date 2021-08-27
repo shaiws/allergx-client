@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import MaterialCard from '../Components/MaterialCard';
 
 
@@ -14,17 +14,19 @@ function Product({ route, navigation }) {
     }
 
     return (
-        <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
-            <MaterialCard
-                nav={navigation}
-                name={prodName}
-                code={prodCode}
-                allergens={prodAllergens.sort()}
-                maycontain={prodMayContain.sort()}
-                image={prodImage}
-                style={styles.materialCard}
-            />
-        </View>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "lightblue" }}>
+            <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
+                <MaterialCard
+                    nav={navigation}
+                    name={prodName}
+                    code={prodCode}
+                    allergens={prodAllergens.sort()}
+                    maycontain={prodMayContain.sort()}
+                    image={prodImage}
+                    style={styles.materialCard}
+                />
+            </View>
+        </SafeAreaView>
     )
 }
 
