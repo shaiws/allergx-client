@@ -4,13 +4,14 @@ import { Divider, Searchbar } from 'react-native-paper';
 import { FAB } from 'react-native-paper';
 import { BarIndicator } from 'react-native-indicators';
 import MaterialCardWithImageAndTitle from '../Components/MaterialCardWithImageAndTitle'
-import CheckBoxList from '../Components/CheckBoxList'
+import CheckboxList from 'rn-checkbox-list';
+
 
 const Search = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [allergensList, setAllergensList] = useState([]);
-  const [selectedFiltes, setSelectedFiltes] = useState([]);
+  const [toRemove, setToRemove] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +31,7 @@ const Search = ({ navigation }) => {
     else
       getAllProducts();
     setSearch(text);
+    setToRemove([])
   };
 
   const getAllProducts = async () => {
@@ -64,6 +66,12 @@ const Search = ({ navigation }) => {
     setLoading(false);
   }
   const ItemView = ({ item }) => {
+    let isFiltered = false;
+    for (let i = 0; i < toRemove.length; i++) {
+      if (item.allergens.includes(toRemove[i].name) || item.maycontain.includes(toRemove[i].name)) {
+        return (<></>);
+      }
+    }
     return (
       <TouchableOpacity onPress={() => getItem(item)}>
         <MaterialCardWithImageAndTitle
@@ -71,6 +79,7 @@ const Search = ({ navigation }) => {
           image={item.image}
           prodName={item.name}
           prodCode={item.barcode} />
+        <Divider style={{ backgroundColor: 'black' }} />
       </TouchableOpacity>
     );
   };
@@ -122,8 +131,13 @@ const Search = ({ navigation }) => {
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                {/* <CheckBoxList list={allergensList} /> */}
-                <Text>בקרוב...</Text>
+                <CheckboxList
+                  listItems={allergensList}
+                  selectedListItems={toRemove}
+                  headerName="בחר אילו מאפיינים ברצונך להסיר מתוצאות החיפוש"
+                  onChange={({ ids, items }) => { setToRemove(items); }}
+                  theme="red"
+                />
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(false)}>
@@ -138,7 +152,7 @@ const Search = ({ navigation }) => {
           !loading ? <FlatList
             data={searchResults}
             keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'black' }} />}
+            // ItemSeparatorComponent={() => <Divider style={{ backgroundColor: 'gray' }} />}
             renderItem={ItemView}
           /> :
             <View style={{
