@@ -120,6 +120,7 @@ const Search = ({ navigation }) => {
             <Text style={styles.textStyle}>סינון</Text>
           </Pressable>
         </View>
+        <SafeAreaView>
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -148,6 +149,7 @@ const Search = ({ navigation }) => {
           </Modal>
 
         </View>
+        </SafeAreaView>
         {
           !loading ? <FlatList
             data={searchResults}
