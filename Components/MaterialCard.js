@@ -64,7 +64,8 @@ function MaterialCard(props) {
         </View>}
         <ScrollView style={styles.warning}>
           <Text style={{ writingDirection: 'rtl' }}>
-            {'הנתונים המדויקים מופיעים על גבי המוצר. אין להסתמך על הפירוט המופיע באפליקציה. יתכנו טעויות או אי התאמות. יש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש.'}
+            {
+              'הנתונים המדויקים מופיעים על גבי המוצר.\nאין להסתמך על הפירוט המופיע באפליקציה.\nיתכנו טעויות או אי התאמות.\nיש לקרוא את המופיע על גבי אריזת המוצר לפני השימוש.'}
           </Text>
         </ScrollView>
       </View >
@@ -127,8 +128,8 @@ const styles = StyleSheet.create({
     flex: 3
   },
   warning: {
-    flex: 1,
-    padding: 0,
+    flex: 3,
+    padding: 5,
     margin: 5,
     height: 80,
     width: '100%',

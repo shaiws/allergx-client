@@ -135,7 +135,7 @@ const Search = ({ navigation }) => {
                 <CheckboxList
                   listItems={allergensList}
                   selectedListItems={toRemove}
-                  headerName="בחר אילו מאפיינים ברצונך להסיר מתוצאות החיפוש"
+                  headerName="הסרה מתוצאות החיפוש"
                   onChange={({ ids, items }) => { setToRemove(items); }}
                   theme="red"
                 />
@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
+    writingDirection: 'rtl',
     justifyContent: "center",
   },
   modalView: {
