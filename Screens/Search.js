@@ -120,7 +120,7 @@ const Search = ({ navigation }) => {
             <Text style={styles.textStyle}>סינון</Text>
           </Pressable>
         </View>
-        <SafeAreaView>
+        
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -130,14 +130,16 @@ const Search = ({ navigation }) => {
               setModalVisible(!modalVisible);
             }}
           >
-            <View style={styles.centeredView}>
+            <SafeAreaView style={styles.centeredView}>
               <View style={styles.modalView}>
                 <CheckboxList
                   listItems={allergensList}
                   selectedListItems={toRemove}
                   headerName="הסרה מתוצאות החיפוש"
+                  headerStyle={styles.checklistHeader}
+                  listItemStyle={{alignContent:'flex-end'}}
                   onChange={({ ids, items }) => { setToRemove(items); }}
-                  theme="red"
+                  theme="black"
                 />
                 <Pressable
                   style={[styles.button, styles.buttonClose]}
@@ -145,11 +147,10 @@ const Search = ({ navigation }) => {
                   <Text style={styles.textStyle}>אישור</Text>
                 </Pressable>
               </View>
-            </View>
+            </SafeAreaView>
           </Modal>
 
         </View>
-        </SafeAreaView>
         {
           !loading ? <FlatList
             data={searchResults}
@@ -258,6 +259,17 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  checklistHeader:{
+    padding:10,
+    flexDirection:'row',
+    alignItems:'flex-end',
+    backgroundColor:'light-grey',
+    text:{
+      color:'black',
+      fontWeight:'bold',
+      fontSize:16
+    },
   }
 });
 
