@@ -120,7 +120,7 @@ const Search = ({ navigation }) => {
             <Text style={styles.textStyle}>סינון</Text>
           </Pressable>
         </View>
-        
+
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -136,8 +136,7 @@ const Search = ({ navigation }) => {
                   listItems={allergensList}
                   selectedListItems={toRemove}
                   headerName="הסרה מתוצאות החיפוש"
-                  headerStyle={styles.checklistHeader}
-                  listItemStyle={{alignContent:'flex-end'}}
+                  //headerStyle={styles.checklistHeader}
                   onChange={({ ids, items }) => { setToRemove(items); }}
                   theme="black"
                 />
@@ -260,15 +259,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center"
   },
-  checklistHeader:{
-    padding:10,
-    flexDirection:'row',
-    alignItems:'flex-end',
-    backgroundColor:'light-grey',
-    text:{
-      color:'black',
-      fontWeight:'bold',
-      fontSize:16
+  checklistHeader: {
+    padding: 10,
+    flexDirection: 'row',
+    text: {
+      paddingTop: 10,
+      color: 'black',
+      fontWeight: 'bold',
+      fontSize: 16,
+      alignSelf: 'flex-start',
     },
   }
 });
