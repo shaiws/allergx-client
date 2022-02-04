@@ -4,15 +4,15 @@ import MaterialCard from '../Components/MaterialCard';
 
 
 function Product({ route, navigation }) {
-    const { prodName, prodCode, prodAllergens, prodMayContain, prodImage } = route.params;
-    const product = {
-        name: prodName,
-        barcode: prodCode,
-        image: prodImage,
-        allergens: prodAllergens,
-        maycontain: prodMayContain,
-    }
-
+    const { prodName, prodCode, prodAllergens, prodMayContain, prodImage, prodDate } = route.params;
+    // const product = {
+    //     name: prodName,
+    //     barcode: prodCode,
+    //     image: prodImage,
+    //     allergens: prodAllergens,
+    //     maycontain: prodMayContain,
+    //     date: updateDate
+    // }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "lightblue" }}>
             <View style={{ flex: 1, backgroundColor: 'lightblue' }}>
@@ -23,6 +23,7 @@ function Product({ route, navigation }) {
                     allergens={prodAllergens.sort()}
                     maycontain={prodMayContain.sort()}
                     image={prodImage}
+                    date={prodDate}
                     style={styles.materialCard}
                 />
             </View>

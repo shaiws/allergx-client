@@ -26,8 +26,11 @@ function MaterialCard(props) {
         <View style={styles.bodyContent}>
           <View style={{ flexDirection: 'row' }}>
             <Text style={styles.titleStyle}>{props.name}</Text>
+
           </View>
-          <Text style={styles.subtitleStyle}>{props.code}</Text>
+          <Text style={styles.subtitleStyle}>{`ברקוד: ${props.code}`}</Text>
+          <Text style={styles.subtitleStyle}>{`מעודכן לתאריך: ${new Date(props.date).toLocaleDateString()}`}</Text>
+
         </View>
         <View style={[styles.allergensContainer, { flex: 2 }]}>
           <Text style={{
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     paddingBottom: -16,
   },
   titleStyle: {
-    flex: 10,
+    flex: 1,
     alignSelf: 'flex-start',
     writingDirection: 'rtl',
     fontSize: 20,
@@ -118,6 +121,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     writingDirection: 'rtl',
     flex: 1
+
   },
   allergensContainer: {
     padding: 16,
